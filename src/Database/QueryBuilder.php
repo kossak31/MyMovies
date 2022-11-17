@@ -147,6 +147,12 @@ class QueryBuilder
 
 
 
+    public function searchByName($table, $name, $class = "StdClass")
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+    }
 
 
 

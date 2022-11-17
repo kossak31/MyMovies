@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio</title>
+    <title>MyMovies</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
@@ -119,8 +119,8 @@
             <td class="maintdleft">
 
                 <div class="menuleft">
-                    <form action="" style="margin: 5px;">
-                        <input type="search" name="search" id="">
+                    <form action="search" id="search" style="margin: 5px;">
+                        <input id="procurar" type="text" name="search">
                         <input type="submit" value="Procurar">
                     </form>
 
@@ -141,29 +141,53 @@
             </td>
             <td class="maintd">
                 <div id="news">
+                    <?php if (!isset($_GET['search'])) : ?>
+                        <div class="d-flex justify-content-center">
+                            <img src="logo/logo.png" alt="logo" width="300px" height="150px">
 
-                <div class="d-flex justify-content-center">
-                    <img src="logo/logo.png" alt="logo" width="300px" height="150px">
+                        </div>
 
-                </div>
+                        <h2>onde encontrar o código fonte:</h2>
+                        <p> este projecto está no <a href="https://github.com/kossak31/MyMovies">github</a> pelo utilizador <b>kossak31</b> no seguinte repositório chamado <b>MyMovies</b></p>
 
-                    <h3>O que isto faz:</h3>
+                        <h3>Acerca do projecto:</h3>
 
-                    <p>Esta plataforma permite recomendar filmes e fazer de base de dados</p>
-                    <p>a página principal tem um formulario de login, procurar por género e listar o último filme inserido.</p>
+                        <p>Esta plataforma permite inserir filmes, atores, géneros e realizadores numa base de dados MySQL usando um MVC simples.</p>
+                        <p>Também é possivel listar filmes por género, realizador ou por actor.</p>
+                        <p>a página principal tem um menu que permite listar por filmes, atores e realizadores.
+                            Um formulario de login, procurar por género, selecionar o último filme inserido e um filme aleatório.</p>
 
-                    <h3>administração do MyMovies:</h3>
-                    <p>Existe um utilizador <b>admin</b> com a password <b>"Password@123"</b> permite gerir a plataforma.</p>
+                        <p>caso nao seja adicionado uma capa no filme aparece uma imagem por defeito.</p>
 
-                    <p>O utilizador admin acede a um sistema CRUD (Create Read Update Delete) com os seguintes tipos:</p>
-                    <ul>
-                        <li>Filmes</li>
-                        <li>Generos</li>
-                        <li>Realizadores</li>
-                        <li>Actores</li>
-                    </ul>
+                        <h3>administração do MyMovies:</h3>
+                        <p>Existe um utilizador <b>admin</b> com a password <b>"Password@123"</b> permite gerir a plataforma.</p>
+
+                        <p>O utilizador admin acede a um sistema CRUD (Create Read Update Delete) com os seguintes tipos:</p>
+                        <ul>
+                            <li>Filmes</li>
+                            <li>Generos</li>
+                            <li>Realizadores</li>
+                            <li>Actores</li>
+                        </ul>
+
+                        <p>Existe um sistema de alertas que permite ao utilizador saber se o filme foi inserido.</p>
 
 
+                    <?php else : ?>
+                        <?php foreach ($searchByName as $search):?>
+                            <div class="card" style="width: 18rem;">
+                                <img src="<?php echo $search->id ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title
+                                    "><?php echo $search->name ?></h5>
+                                    
+                                    <a href="<?php echo route('filmes/' . $search->id) ?>" class="btn btn-primary">Ver mais</a>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+
+
+                    <?php endif ?>
                 </div>
             </td>
             <td class="maintdright">
@@ -198,7 +222,7 @@
 
 
                 <?php if (isset($lastMovie->id)) : ?>
-                    <div class="menuside" style="border-right-width: 0px; margin-top: 10px; text-align: center;">Ultimo registo</div>
+                    <div class="menuside" style="border-right-width: 0px; margin-top: 10px; text-align: center;">Último registo</div>
                     <table>
                         <tr>
                         <tr align="center">
@@ -246,7 +270,8 @@
                     </table>
                 <?php endif ?>
 
-                
+
+
 
 </body>
 

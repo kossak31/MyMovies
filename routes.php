@@ -85,6 +85,10 @@ $router->get('status', function () {
 
 
 
+$router->get('search\?search\=(\w+)', function () {
+    require 'controllers/search.php';
+});
+
 $router->get('genero/(\d+)', function ($id) {
     require 'controllers/genres/genres.show.php';
 });

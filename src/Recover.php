@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Config;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -20,8 +22,8 @@ class Recover
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.mailtrap.io';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = '92e02cb13ba586';                     //SMTP username
-            $mail->Password   = '9d6275cc128e28';                               //SMTP password
+            $mail->Username   = Config::MAILTRAP_USER;                     //SMTP username
+            $mail->Password   = Config::MAILTRAP_PASS;                               //SMTP password
             $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
             $mail->Port       = 2525;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 

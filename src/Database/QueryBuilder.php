@@ -31,8 +31,13 @@ class QueryBuilder
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
-
-
+    
+    //delete por id
+    public function deleteById($table, $id)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM $table WHERE id=:id");
+        $stmt->execute(['id' => $id]);
+    }
 
 
     public function insertMovie($movie)
@@ -138,11 +143,9 @@ class QueryBuilder
     }
 
 
-    public function deleteByMovieId($id)
-    {
-        $stmt = $this->pdo->prepare("DELETE FROM movie WHERE id=:id");
-        $stmt->execute(['id' => $id]);
-    }
+
+
+
 
 
 
@@ -178,7 +181,7 @@ class QueryBuilder
         $stmt = $this->pdo->prepare("UPDATE reset SET code = :code, expdate = :expire WHERE email = :email");
         $stmt->execute(['email' => $email, 'code' => $code, 'expire' => $expire]);
     }
-    
+
     //verificar se email e token existem
     public function checkCode($email, $code)
     {

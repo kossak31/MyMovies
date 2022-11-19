@@ -9,5 +9,11 @@ $queryBuilder = new QueryBuilder($connection);
 
 
 
-$queryBuilder->deleteByMovieId($_POST['id']);
-redirect('admin/filmes');
+
+
+if (!$login && $username == 'admin') {
+    redirect('');
+} else {
+    $queryBuilder->deleteById('movie',$id);
+    redirect('admin/filmes');
+}

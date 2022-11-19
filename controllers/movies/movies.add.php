@@ -14,6 +14,11 @@ if (!empty($_POST)) {
     $movie = new Movie();
     $movie->name = $_POST['name'];
     $movie->genre = $_POST['genre'];
+    $movie->actor = $_POST['actor'];
+    $movie->year = $_POST['year'];
+    $movie->country = $_POST['country'];
+    $movie->director_id = $_POST['director_id'];
+    
     $queryBuilder->insertMovie($movie);
 
     $last = $queryBuilder->getLast('movie', 'App\Model\Movie');

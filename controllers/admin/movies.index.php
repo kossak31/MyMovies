@@ -17,7 +17,8 @@ foreach ($movies as $movie) {
 $login = Session::get('login');
 $username = Session::get('username');
 
-if (!$login) {
+
+if (!$login && $username == 'admin') {
     redirect('');
 } else {
     require 'views/admin/movies.index.php';

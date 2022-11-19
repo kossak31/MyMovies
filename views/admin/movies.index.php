@@ -65,7 +65,8 @@
                                 <a class="btn btn-warning" href="<?php echo route('admin/filmes/' . $movie->id . '/editar'); ?>" role="button">Editar</a>
                                 <form action="<?php echo route('admin/filmes/' . $movie->id); ?>" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="id" value="<?php echo $movie->id; ?>">
+                                    
+                                
                                     <button type="submit" class="btn btn-danger">Apagar</button>
                                 </form>
                             </div>

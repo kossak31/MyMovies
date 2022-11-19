@@ -7,6 +7,7 @@ use App\Config;
 use App\Session;
 
 Session::init();
+date_default_timezone_set('Europe/Lisbon');    
 
 $router = Router::setFromFile('routes.php');
 

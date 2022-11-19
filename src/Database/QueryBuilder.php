@@ -157,6 +157,36 @@ class QueryBuilder
 
 
 
+    //password recover
+    public function selectUserByEmail($table, $email, $class = "StdClass")
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE email=:email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+    }
+
+    //inserir email e token expdate
+    public function insertReset($email, $code, $expire)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO reset(email, code, expdate) VALUES (:email, :code, :expire)");
+        $stmt->execute(['email' => $email, 'code' => $code, 'expire' => $expire]);
+    }
+
+    //actualiar codigo e expdate
+    public function updateReset($email, $code, $expire)
+    {
+        $stmt = $this->pdo->prepare("UPDATE reset SET code = :code, expdate = :expire WHERE email = :email");
+        $stmt->execute(['email' => $email, 'code' => $code, 'expire' => $expire]);
+    }
+    
+    //verificar se email e token existem
+    public function checkCode($email, $code)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM reset WHERE email = :email AND code = :code");
+        $stmt->execute(['email' => $email, 'code' => $code]);
+        return $stmt->fetch();
+    }
+
 
 
 

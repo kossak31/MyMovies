@@ -36,7 +36,7 @@ class Router
     }
 
     public function direct($uri, $method)
-    {
+    {    
         if (!empty($this->routes[$method])) {
             foreach ($this->routes[$method] as $route => $callback) {
                 $route = '/^' . str_replace('/', '\/', $route) . '$/';

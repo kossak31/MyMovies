@@ -83,7 +83,29 @@ $router->get('status', function () {
     require 'controllers/status.php';
 });
 
+//formulario de recuperação de password por email
+$router->get('check-email', function () {
+    require 'views/recover/check-email.php';
+    
+});
 
+$router->post('check-email', function () {
+    require 'controllers/recover/check-email.php';
+   
+});
+
+
+
+$router->get('reset-password\?email\=(\\S+@\\S+\\.\\S+)\&code=(\w+)', function () {
+ 
+    require 'controllers/recover/recover.php';
+});
+
+
+
+$router->post('recover', function () {
+    require 'controllers/recover.php';
+});
 
 $router->get('search\?search\=(\w+)', function () {
     require 'controllers/search.php';

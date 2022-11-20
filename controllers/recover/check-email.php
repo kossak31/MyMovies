@@ -24,9 +24,9 @@ if (isset($_POST['reset_link'])) {
         $code = Recover::generateRandomString();
 
         // Formulate the link
-        $link = 'href="http://localhost/Movies/reset_password?email=' . $email . '&code=' . $code . '"';
+        $link = 'href="http://localhost/Movies/reset-password?email=' . $email . '&code=' . $code . '"';
 
-        $link2 = '<span style="width:100%;"><a style="padding:10px 100px;border-radius:30px;background:#a8edbc;" ' . $link . ' > Link </a></span>';
+        $link2 = 'Este link expira passado 15min, clica no <a " ' . $link . ' "> Link </a>para definir novas passwords';
 
         
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Todos os filmes</title>
+    <title>Filmes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
@@ -23,11 +23,12 @@
                     <div class="col-3">
 
                         <div class="card" style="width: 18rem;">
-                            <img src="covers/<?= $movie->id ?>" class="card-img-top" onerror="this.src='covers/dvd-cover.jpg'">
+                            <img src="covers/<?= $movie->id ?>" class="card-img-top" onerror="this.src='img/dvd-cover.jpg'">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $movie->name ?></h5>
-
-                                <a href="<?php echo route('filmes/' . $movie->id); ?>" class="btn btn-primary">Mais sobre o filme</a>
+                                <div class="d-grid gap-2">
+                                    <a href="<?php echo route('filmes/' . $movie->id); ?>" class="btn btn-primary">Mais sobre o filme</a>
+                                </div>
                             </div>
                         </div>
                     </div>

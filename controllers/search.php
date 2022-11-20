@@ -14,5 +14,13 @@ $searchByName = $queryBuilder->searchByName('movie', $search);
 
 
 
+foreach ($searchByName as $movie) {
+    
 
-require 'views/menu.php';
+    echo '<div class="card">';
+    echo '<div class="card-body">';
+    echo '<img src="covers/' . $movie->id . '.jpg" class="img-fluid" width=100 height=140  onerror="this.src=\'img/dvd-cover.jpg\'">';
+    echo '<a href="filmes/' . $movie->id . '">' . $movie->name . " - " . $movie->year . '</a>';
+    echo '</div>';
+    echo '</div>';
+}

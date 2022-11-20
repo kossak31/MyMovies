@@ -34,6 +34,8 @@ $router->post('filmes', function () {
 
 
 
+
+
 //ATORES, show, post
 $router->get('atores', function () {
     require 'controllers/actors/actors.list.php';
@@ -58,7 +60,7 @@ $router->post('atores', function () {
 
 
 //GENEROS, show, post
-$router->get('generos/', function ($id) {
+$router->get('generos', function () {
     require 'controllers/genres/genres.list.php';
 });
 
@@ -81,7 +83,7 @@ $router->post('generos', function () {
 
 //REALIZADORES, show, post
 
-$router->get('realizadores/', function ($id) {
+$router->get('realizadores', function () {
     require 'controllers/directors/directors.list.php';
 });
 
@@ -108,17 +110,34 @@ $router->get('admin/filmes', function () {
     require 'controllers/admin/movies.index.php';
 });
 
+$router->patch('filmes/(\d+)', function ($id) {
+    require "controllers/admin/filmes.edit.php";
+});
+
 $router->get('admin/generos', function () {
     require 'controllers/admin/genres.index.php';
+});
+
+$router->patch('generos/(\d+)', function ($id) {
+    require "controllers/admin/generos.edit.php";
 });
 
 $router->get('admin/atores', function () {
     require 'controllers/admin/actors.index.php';
 });
 
+$router->patch('atores/(\d+)', function ($id) {
+    require "controllers/admin/actors.edit.php";
+});
+
 $router->get('admin/realizadores', function () {
     require 'controllers/admin/directors.index.php';
 });
+
+$router->patch('realizadores/(\d+)', function ($id) {
+    require "controllers/admin/directors.edit.php";
+});
+
 
 
 
@@ -257,6 +276,10 @@ $router->post('check-email', function () {
 //link de recuperação de password
 $router->get('reset-password\?email\=(\\S+@\\S+\\.\\S+)\&code=(\w+)', function () {
     require 'controllers/recover/recover.php';
+});
+
+$router->post('reset-password', function () {
+    require 'controllers/recover/reset-password.php';
 });
 
 

@@ -1,5 +1,3 @@
-
-
 CREATE TABLE login (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username varchar(255),
@@ -8,6 +6,13 @@ CREATE TABLE login (
 );
 
 INSERT INTO login (username, password) VALUES ('admin', '$2y$10$8sA2N5Sx/1zMQv2yrTDAaOFlbGWECrrgB68axL.hBb78NhQdyAqWm');
+
+CREATE TABLE reset {
+    email varchar(255),
+    code varchar(5)
+    expdate datetime,
+}
+
 
 CREATE TABLE genre (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,

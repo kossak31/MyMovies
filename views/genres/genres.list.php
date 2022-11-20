@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atores</title>
+    <title>Géneros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
@@ -15,19 +15,19 @@
 
     <div class="container">
         <div class="row">
-            <h1>Listar Actores</h1>
+            <h1>Listar Géneros</h1>
 
-            <?php if (isset($actors)) : ?>
+            <?php if (isset($genres)) : ?>
 
-                <?php foreach ($actors as $actor) : ?>
+                <?php foreach ($genres as $genre) : ?>
                     <div class="col-3">
 
                         <div class="card" style="width: 18rem;">
                             
                             <div class="card-body">
-                                <h5 class="card-title"><?= $actor->name ?></h5>
+                                <h5 class="card-title"><?= $genre->name ?></h5>
                                 <div class="d-grid gap-2">
-                                    <a href="<?php echo route('atores/' . $actor->id); ?>" class="btn btn-primary">Ver Filmes</a>
+                                    <a href="<?php echo route('generos/' . $genre->id ); ?>" class="btn btn-primary">Listar Filmes</a>
                                 </div>
                             </div>
                         </div>

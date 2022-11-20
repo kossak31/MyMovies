@@ -11,9 +11,10 @@ $queryBuilder = new QueryBuilder($connection);
 $login = Session::get('login');
 $username = Session::get('username');
 
+
 if (!$login && $username == 'admin') {
     redirect('');
 } else {
-    $queryBuilder->deleteById('movie', $id);
-    redirect('admin/filmes');
+    $queryBuilder->deleteById('actor', $id);
+    redirect('admin/atores');
 }

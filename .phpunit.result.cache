@@ -1,1 +1,1 @@
-{"version":1,"defects":{"RoutesTest::testRoutes":4,"App\\RoutesTest::testRoutes":4,"RoutesTest::testDeleteMovie":4},"times":{"RoutesTest::testRoutes":0.337,"App\\RoutesTest::testRoutes":0.33,"RoutesTest::testDeleteMovie":0.121}}
+{"version":1,"defects":{"RoutesTest::testRoutes":4,"App\\RoutesTest::testRoutes":4,"RoutesTest::testDeleteMovie":4},"times":{"RoutesTest::testRoutes":0.242,"App\\RoutesTest::testRoutes":0.33,"RoutesTest::testDeleteMovie":0.079}}

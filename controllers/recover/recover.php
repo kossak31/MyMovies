@@ -17,6 +17,8 @@ $expdate = $queryBuilder->selectUserByEmail('reset', $_GET['email']);
 
 
 if ($page && $expdate[0]->expdate > date("Y-m-d H:i:s") ) {
+  
+    
     require 'views/recover/recover.php';
 } else {
     echo "Invalid link";

@@ -24,7 +24,7 @@
                     <table align="left">
                         <tr>
                             <td>
-                                <img src="../covers/<?php echo $movie->id; ?>.jpg" width="150" height="200" style="margin: 3px 5px 0 0; max-width:220px; height:auto; width:auto;" onerror="this.src='../covers/dvd-cover.jpg'">
+                                <img src="../covers/<?php echo $movie->id; ?>.jpg" width="150" height="200" style="margin: 3px 5px 0 0; max-width:220px; height:auto; width:auto;" onerror="this.src='../img/dvd-cover.jpg'">
 
                             </td>
                         </tr>

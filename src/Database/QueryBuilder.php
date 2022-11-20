@@ -31,7 +31,7 @@ class QueryBuilder
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
-    
+
     //delete por id
     public function deleteById($table, $id)
     {
@@ -84,6 +84,25 @@ class QueryBuilder
         }
     }
 
+    //inserir ator
+    public function insertActor($actor)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO actor (name) VALUES (:name)");
+        $stmt->execute([
+            'name' => $actor->name,
+        ]);
+    }
+
+    //update actor
+    public function updateActor($actor)
+    {
+        $stmt = $this->pdo->prepare("UPDATE actor SET name=:name WHERE id=:id");
+        $stmt->execute([
+            'name' => $actor->name,
+            'id' => $actor->id
+        ]);
+    }
+
     // selecionar ultimo registo
     public function getLast($table, $class = "StdClass")
     {
@@ -108,6 +127,8 @@ class QueryBuilder
         $stmt->execute(['username' => $username]);
         return $stmt->fetchColumn();
     }
+
+
 
     // encontrar generos por filme id
     public function findByMovieId($table, $id, $class = "StdClass")
@@ -143,18 +164,24 @@ class QueryBuilder
     }
 
 
+    //encontrar filmes por diretor id
+    public function findByDirectorId($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM movie WHERE  director_id=:id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
+    }
 
 
 
 
 
 
-
-    public function searchByName($table, $name, $class = "StdClass")
+    public function searchByName($table, $name)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE name LIKE :name");
         $stmt->execute(['name' => '%' . $name . '%']);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
 
 
@@ -190,36 +217,10 @@ class QueryBuilder
         return $stmt->fetch();
     }
 
-
-
-
-    public function insert($livro)
+    public function insertHashPassword($code, $hash)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO livro (nome, editora_id, pags) VALUES (:nome, :editora_id, :pags)");
-        $stmt->execute([
-            'nome' => $livro->nome,
-            'editora_id' => $livro->editora_id,
-            'pags' => $livro->pags
-        ]);
+        $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE code=:code");
+        $stmt->execute(['password' => $hash, 'code' => $code]);
     }
 
-
-    public function update($livro)
-    {
-        $stmt = $this->pdo->prepare("UPDATE livro SET nome=:nome, editora_id=:editora_id, pags=:pags WHERE id=:id");
-        $stmt->execute([
-            'id' => $livro->id,
-            'nome' => $livro->nome,
-            'editora_id' => $livro->editora_id,
-            'pags' => $livro->pags
-        ]);
-    }
-
-
-
-    public function delete($id)
-    {
-        $stmt = $this->pdo->prepare("DELETE FROM livro WHERE id=:id");
-        $stmt->execute(['id' => $id]);
-    }
 }

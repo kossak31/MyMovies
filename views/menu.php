@@ -9,23 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-image: url('img/background.jpg');">
 
     <style>
-        font,
-        th,
-        td,
-        p,
-        li,
-        div {
-            font-family: Verdana, Arial, Helvetica, sans-serif;
-            font-weight: normal;
-        }
-
-
-
         .maintdleft {
-            width: 109px;
+            width: 110px;
             border-right: 1px solid #999999;
             background-color: #e9e9e6;
         }
@@ -41,7 +29,7 @@
         A.menuleft {
             display: block;
             font-weight: normal;
-            font-size: 11px;
+            font-size: 1em;
             border-bottom: 1px dashed #999999;
             color: #000000;
             text-decoration: none;
@@ -92,7 +80,7 @@
         A.menuright {
             display: block;
             font-weight: normal;
-            font-size: 11px;
+            font-size: 1em;
             border-bottom: 1px dashed #999999;
             color: #000000;
             text-decoration: none;
@@ -119,9 +107,9 @@
             <td class="maintdleft">
 
                 <div class="menuleft">
-                    <form action="search" id="search" style="margin: 5px;">
-                        <input id="procurar" type="text" name="search">
-                        <input type="submit" value="Procurar">
+                    <form id="search" style="margin: 5px;">
+                        <input id="procurar" type="text" name="search" placeholder="procurar por filme">
+
                     </form>
 
                 </div>
@@ -133,7 +121,7 @@
                     <b>Géneros</b>
                 </div>
                 <?php foreach ($genres as $genre) : ?>
-                    <a href="<?php echo route('genero/' . $genre->id) ?>" class="menuleft"><?php echo $genre->name; ?></a>
+                    <a href="<?php echo route('generos/' . $genre->id) ?>" class="menuleft"><?php echo $genre->name; ?></a>
                 <?php endforeach ?>
 
 
@@ -141,53 +129,38 @@
             </td>
             <td class="maintd">
                 <div id="news">
-                    <?php if (!isset($_GET['search'])) : ?>
-                        <div class="d-flex justify-content-center">
-                            <img src="logo/logo.png" alt="logo" width="300px" height="150px">
 
-                        </div>
+                    <div class="d-flex justify-content-center">
+                        <img src="img/logo.png" width="300px" height="150px">
+                    </div>
 
-                        <h2>onde encontrar o código fonte:</h2>
-                        <p> este projecto está no <a href="https://github.com/kossak31/MyMovies">github</a> pelo utilizador <b>kossak31</b> no seguinte repositório chamado <b>MyMovies</b></p>
+                    <h2>onde encontrar o código fonte:</h2>
+                    <p> este projecto está no <a href="https://github.com/kossak31/MyMovies">github</a> pelo utilizador <b>kossak31</b> no seguinte repositório chamado <b>MyMovies</b></p>
 
-                        <h3>Acerca do projecto:</h3>
+                    <h3>Acerca do projecto:</h3>
 
-                        <p>Esta plataforma permite inserir filmes, atores, géneros e realizadores numa base de dados MySQL usando um MVC simples.</p>
-                        <p>Também é possivel listar filmes por género, realizador ou por actor.</p>
-                        <p>a página principal tem um menu que permite listar por filmes, atores e realizadores.
-                            Um formulario de login, procurar por género, selecionar o último filme inserido e um filme aleatório.</p>
+                    <p>Esta plataforma permite inserir filmes, atores, géneros e realizadores numa base de dados MySQL usando um MVC simples.</p>
+                    <p>Também é possivel listar filmes por género, realizador ou por actor.</p>
+                    <p>a página principal tem um menu que permite listar por filmes, atores e realizadores.
+                        Um formulario de login, procurar por género, selecionar o último filme inserido e um filme aleatório.</p>
 
-                        <p>caso nao seja adicionado uma capa no filme aparece uma imagem por defeito.</p>
+                    <p>caso nao seja adicionado uma capa no filme aparece uma imagem por defeito.</p>
 
-                        <h3>administração do MyMovies:</h3>
-                        <p>Existe um utilizador <b>admin</b> com a password <b>"Password@123"</b> permite gerir a plataforma.</p>
+                    <h3>administração do MyMovies:</h3>
+                    <p>Existe um utilizador <b>admin</b> com a password <b>"Password@123"</b> permite gerir a plataforma.</p>
 
-                        <p>O utilizador admin acede a um sistema CRUD (Create Read Update Delete) com os seguintes tipos:</p>
-                        <ul>
-                            <li>Filmes</li>
-                            <li>Generos</li>
-                            <li>Realizadores</li>
-                            <li>Actores</li>
-                        </ul>
+                    <p>O utilizador admin acede a um sistema CRUD (Create Read Update Delete) com os seguintes tipos:</p>
+                    <ul>
+                        <li>Filmes</li>
+                        <li>Generos</li>
+                        <li>Realizadores</li>
+                        <li>Actores</li>
+                    </ul>
 
-                        <p>Existe um sistema de alertas que permite ao utilizador saber se o filme foi inserido.</p>
-
-
-                    <?php else : ?>
-                        <?php foreach ($searchByName as $search):?>
-                            <div class="card" style="width: 18rem;">
-                                <img src="<?php echo $search->id ?>" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title
-                                    "><?php echo $search->name ?></h5>
-                                    
-                                    <a href="<?php echo route('filmes/' . $search->id) ?>" class="btn btn-primary">Ver mais</a>
-                                </div>
-                            </div>
-                        <?php endforeach ?>
+                    <p>Existe um sistema de alertas que permite ao utilizador saber se o filme foi inserido.</p>
 
 
-                    <?php endif ?>
+
                 </div>
             </td>
             <td class="maintdright">
@@ -197,21 +170,24 @@
                     <?php if ($login == false) : ?>
 
                         <form action="<?php echo route('login'); ?>" method="POST">
-                            <table>
+                            <table align="center">
                                 <tr>
-                                    <td colspan="2">
-                                        <input type="text" name="username">
+                                    <td>
+                                        <input type="text" placeholder="username" name="username">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><input type="password" name="password"></td>
+                                    <td><input type="password" placeholder="password" name="password"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="submit" class="btn btn-primary" value="Entrar"></td>
+                                    <td>
+                                        <div class="d-grid gap-2 mx-auto"><input type="submit" class="btn btn-warning " value="Entrar"></div>
+
+                                    </td>
                                 </tr>
                             </table>
                         </form>
-                        <div align="center" style="margin-top: 5px; margin-bottom: 5px;"><a href="index.php?op=Join" style="font-size: 9px;">Ainda não se registou?</a></div>
+                        <div align="center" style="margin-top: 5px; margin-bottom: 5px;"><a href="<?php echo route('check-email'); ?>">Recuperar Password</a></div>
                     <?php else : ?>
                         <div align="center" style="margin-top: 5px; margin-bottom: 5px;">
                             <a class="btn btn-danger" href="<?php echo route('logout'); ?>">logout</a>
@@ -222,57 +198,72 @@
 
 
                 <?php if (isset($lastMovie->id)) : ?>
-                    <div class="menuside" style="border-right-width: 0px; margin-top: 10px; text-align: center;">Último registo</div>
-                    <table>
-                        <tr>
-                        <tr align="center">
-                            <td width="300px" valign="top" align="center" style="background-color: #e9e9e6; padding-top: 2px; padding-bottom: 4px;">
+                    <div style="background-color: #e9e9e6;">
+
+                        <div class="menuside" style="border-right-width: 0px; margin-top: 10px; text-align: center;">Último registo</div>
 
 
-                        <tr align="center">
-                            <td width="117" valign="top" align="center" style="background-color: #e9e9e6; padding-top: 2px; padding-bottom: 4px;">
+                        <table align="center" style="width: 98px; height: 15px;">
+                            <tr>
+                                <td width="1%"></td>
+                                <td style="width: 49%;"><a href="http://www.youtube.com/embed/3eaiw71A9Fw?autoplay=1&rel=0" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; top: -2px; "><a href="<?php echo route('filmes/' . $lastMovie->id); ?>" title="Clique para ver mais..."><img src="covers/<?php echo $lastMovie->id; ?>.jpg" width=100 height=140 onerror="this.src='img/dvd-cover.jpg'"></a></div>
 
-                                <table style="width: 98px; height: 15px;">
-                                    <tr>
-                                        <td width="1%"></td>
-                                        <td style="width: 49%;"><a href="http://www.youtube.com/embed/3eaiw71A9Fw?autoplay=1&rel=0" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
-                                    </tr>
-                                </table>
-                                <div style="top: -2px; position: relative; z-index: 0;"><a href="<?php echo route('filmes/' . $lastMovie->id); ?>" title="Clique para ver mais..."><img class="pic_tn" src="covers/<?php echo $lastMovie->id; ?>.jpg" width=100 height=140 onerror="this.src='covers/dvd-cover.jpg'"></a></div>
+                        <div style="text-align: center; margin-top: 3px;"><a href="<?php echo route('filmes/' . $lastMovie->id); ?>"><?php echo $lastMovie->name; ?></a></div>
 
-                                <div style="text-align: center; margin-top: 3px;"><a href="<?php echo route('filmes/' . $lastMovie->id); ?>"><?php echo $lastMovie->name; ?></a></div>
 
-                    </table>
+                    </div>
                 <?php endif ?>
 
 
                 <?php if (isset($randomMovie->id)) : ?>
-                    <div class="menuside" style="border-right-width: 0px; margin-top: 10px; text-align: center;">Filme Aleatório</div>
-                    <table>
-                        <tr>
-                        <tr align="center">
-                            <td width="300px" valign="top" align="center" style="background-color: #e9e9e6; padding-top: 2px; padding-bottom: 4px;">
+                    <div style="background-color: #e9e9e6;">
+                        <div class="menuside" style="border-right-width: 0px; margin-top: 10px; text-align: center;">Filme Aleatório</div>
 
 
-                        <tr align="center">
-                            <td width="117" valign="top" align="center" style="background-color: #e9e9e6; padding-top: 2px; padding-bottom: 4px;">
 
-                                <table style="width: 98px; height: 15px;">
-                                    <tr>
-                                        <td width="1%"></td>
-                                        <td style="width: 49%;"><a href="http://www.youtube.com/embed/3eaiw71A9Fw?autoplay=1&rel=0" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
-                                    </tr>
-                                </table>
-                                <div style="top: -2px; position: relative; z-index: 0;"><a href="<?php echo route('filmes/' . $randomMovie->id); ?>" title="Clique para ver mais..."><img class="pic_tn" src="covers/<?php echo $randomMovie->id; ?>.jpg" width=100 height=140 onerror="this.src='covers/dvd-cover.jpg'"></a></div>
+                        <table align="center" style="width: 98px; height: 15px;">
+                            <tr>
+                                <td width="1%"></td>
+                                <td style="width: 49%;"><a href="http://www.youtube.com/embed/3eaiw71A9Fw?autoplay=1&rel=0" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; top: -2px;  "><a href="<?php echo route('filmes/' . $randomMovie->id); ?>" title="Clique para ver mais..."><img src="covers/<?php echo $randomMovie->id; ?>.jpg" width=100 height=140 onerror="this.src='img/dvd-cover.jpg'"></a></div>
 
-                                <div style="text-align: center; margin-top: 3px;"><a href="<?php echo route('filmes/' . $randomMovie->id); ?>"><?php echo $randomMovie->name; ?></a></div>
+                        <div style="text-align: center; margin-top: 3px;"><a href="<?php echo route('filmes/' . $randomMovie->id); ?>"><?php echo $randomMovie->name; ?></a></div>
 
-                    </table>
+
+                    </div>
                 <?php endif ?>
 
 
-
+                <script>
+                    $(document).ready(function() {
+                        $('#search').keyup(function() {
+                            var query = $("#procurar").val();
+                            if (query != '') {
+                                $.ajax({
+                                    url: "<?php echo route('search'); ?>",
+                                    method: "GET",
+                                    data: {
+                                        search: query
+                                    },
+                                    success: function(data) {
+                                        if (data == '') {
+                                            $('#news').html('<h1>sem resultados na pesquisa</h1>');
+                                        } else {
+                                            $('#news').hide().html(data).fadeIn(500);
+                                        }
+                                    }
+                                });
+                            } else {
+                                $('#news').html('<div class="row text-center img-fluid"><img src="img/logo.png"></div>');
+                            }
+                        });
+                    });
+                </script>
 
 </body>
-
 </html>

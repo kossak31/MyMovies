@@ -206,10 +206,10 @@
                         <table align="center" style="width: 98px; height: 15px;">
                             <tr>
                                 <td width="1%"></td>
-                                <td style="width: 49%;"><a href="http://www.youtube.com/embed/3eaiw71A9Fw?autoplay=1&rel=0" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
+                                <td style="width: 49%;"><a href="http://www.youtube.com/embed/<?php echo $lastMovie->trailer; ?>" target="_blank" style="font-weight: normal; width: 100%;">Trailer</a></td>
                             </tr>
                         </table>
-                        <div style="text-align: center; top: -2px; "><a href="<?php echo route('filmes/' . $lastMovie->id); ?>" title="Clique para ver mais..."><img src="covers/<?php echo $lastMovie->id; ?>.jpg" width=100 height=140 onerror="this.src='img/dvd-cover.jpg'"></a></div>
+                        <div style="text-align: center; top: -2px; "><a href="<?php echo route('filmes/' . $lastMovie->id); ?>" title="Clique para ver mais..."><img src="covers/<?php echo $lastMovie->id; ?>.jpg" width=190 height=290 onerror="this.src='img/dvd-cover.jpg'"></a></div>
 
                         <div style="text-align: center; margin-top: 3px;"><a href="<?php echo route('filmes/' . $lastMovie->id); ?>"><?php echo $lastMovie->name; ?></a></div>
 
@@ -227,10 +227,10 @@
                         <table align="center" style="width: 98px; height: 15px;">
                             <tr>
                                 <td width="1%"></td>
-                                <td style="width: 49%;"><a href="http://www.youtube.com/embed/3eaiw71A9Fw?autoplay=1&rel=0" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
+                                <td style="width: 49%;"><a href="http://www.youtube.com/embed/<?php echo $randomMovie->trailer; ?>" target="_blank" class="sbutton trailer" title="Mais Uma Rodada" style="font-weight: normal; width: 100%;">Trailer</a></td>
                             </tr>
                         </table>
-                        <div style="text-align: center; top: -2px;  "><a href="<?php echo route('filmes/' . $randomMovie->id); ?>" title="Clique para ver mais..."><img src="covers/<?php echo $randomMovie->id; ?>.jpg" width=100 height=140 onerror="this.src='img/dvd-cover.jpg'"></a></div>
+                        <div style="text-align: center; top: -2px;  "><a href="<?php echo route('filmes/' . $randomMovie->id); ?>" title="Clique para ver mais..."><img src="covers/<?php echo $randomMovie->id; ?>.jpg" width=190 height=290 onerror="this.src='img/dvd-cover.jpg'"></a></div>
 
                         <div style="text-align: center; margin-top: 3px;"><a href="<?php echo route('filmes/' . $randomMovie->id); ?>"><?php echo $randomMovie->name; ?></a></div>
 
@@ -266,4 +266,5 @@
                 </script>
 
 </body>
+
 </html>

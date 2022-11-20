@@ -23,11 +23,10 @@
                     <div class="col-3">
 
                         <div class="card" style="width: 18rem;">
-                            <img src="covers/<?php echo $movie->id; ?>" class="card-img-top" onerror="this.src='../img/dvd-cover.jpg'">
+                            <img src="../covers/<?php echo $movie->movie_id; ?>.jpg" onerror="this.src='../img/dvd-cover.jpg'">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $movie->name; ?></h5>
                                 <div class="d-grid gap-2">
-                                <a href="<?php echo route('filmes/' . $movie->movie_id); ?>" class="btn btn-primary">Mais sobre o filme</a>
+                                <a href="<?php echo route('filmes/' . $movie->movie_id); ?>" class="btn btn-primary"><?php echo $movie->name; ?></a>
                                 </div>
                             </div>
                         </div>

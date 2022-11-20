@@ -15,5 +15,7 @@ if (!$login && $username == 'admin') {
     redirect('');
 } else {
     $queryBuilder->deleteById('movie', $id);
+    //delete image file
+    unlink('covers/' . $id . '.jpg');
     redirect('admin/filmes');
 }

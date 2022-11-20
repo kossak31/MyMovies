@@ -20,14 +20,14 @@
             <?php if (isset($movies)) : ?>
 
                 <?php foreach ($movies as $movie) : ?>
-                    <div class="col-3">
+                    <div class="col-3 d-flex justify-content-center">
 
-                        <div class="card" style="width: 18rem;">
-                            <img src="covers/<?= $movie->id ?>" class="card-img-top" onerror="this.src='img/dvd-cover.jpg'">
+                        <div class="card my-2" >
+                            <img src="covers/<?php echo $movie->id; ?>.jpg" width="250" height="300"  onerror="this.src='img/dvd-cover.jpg'">
                             <div class="card-body">
-                                <h5 class="card-title"><?= $movie->name ?></h5>
+                                
                                 <div class="d-grid gap-2">
-                                    <a href="<?php echo route('filmes/' . $movie->id); ?>" class="btn btn-primary">Mais sobre o filme</a>
+                                    <a href="<?php echo route('filmes/' . $movie->id); ?>" class="btn btn-primary"><?php echo $movie->name ?></a>
                                 </div>
                             </div>
                         </div>

@@ -34,7 +34,7 @@
                             <td>
 
                                 <div><b>Realização:</b><br>
-                                    <a href="<?php echo route('realizador/' . $director->id); ?>"><?php echo $director->name; ?></a>
+                                    <a href="<?php echo route('realizadores/' . $director->id); ?>"><?php echo $director->name; ?></a>
                                 </div>
 
 

@@ -18,7 +18,7 @@
         <form action="<?php echo route('atores') ?>" method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome do Ator:</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
             </div>
 
 

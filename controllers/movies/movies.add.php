@@ -13,8 +13,8 @@ if (!empty($_POST)) {
 
     $movie = new Movie();
     $movie->name = $_POST['name'];
-    $movie->genre = $_POST['genre'];
-    $movie->actor = $_POST['actor'];
+    //$movie->genre = $_POST['genre'];
+    //$movie->actor = $_POST['actor'];
     $movie->year = $_POST['year'];
     $movie->country = $_POST['country'];
     $movie->director_id = $_POST['director_id'];
@@ -31,7 +31,7 @@ if (!empty($_POST)) {
 
 
 
-    Session::setInfo('alert-primary', 'foi inserido um filme chamado' . "<b>" . $_POST['name'] . "</b>");
+    Session::setInfo('alert-primary', 'foi inserido um filme chamado ' . "<b>" . $_POST['name'] . "</b>");
 
 
 

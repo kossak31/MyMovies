@@ -15,5 +15,6 @@ if (!$login && $username == 'admin') {
     redirect('');
 } else {
     $queryBuilder->deleteById('director', $id);
-    redirect('admin/realizaores');
+    Session::setInfo('alert-danger', "Apagou o registo");
+    redirect('admin/realizadores');
 }

@@ -18,16 +18,16 @@
         <form action="<?php echo route('filmes') ?>" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome do Filme:</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
             </div>
-
-
+            
+            
 
             <div class="row">
 
                 <div class="col">
                     <label for="">Selecionar Atores:</label>
-                    <select class="form-select" name="actor[]" multiple>
+                    <select class="form-select" name="actor[]" multiple required>
                         <?php foreach ($actors as $actor) : ?>
                             <option value="<?php echo $actor->id; ?>"><?php echo $actor->name; ?></option>
                         <?php endforeach; ?>
@@ -36,7 +36,7 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="">Selecionar Géneros:</label>
-                        <select class="form-select" name="genre[]" multiple>
+                        <select class="form-select" name="genre[]" multiple required>
                             <?php foreach ($genres as $genre) : ?>
                                 <option value="<?php echo $genre->id; ?>"><?php echo $genre->name; ?></option>
                             <?php endforeach; ?>
@@ -49,7 +49,7 @@
 
             <div class="mb-3">
                 <label for="">Selecionar Realizador:</label>
-                <select class="form-select" name="director[]">
+                <select class="form-select" name="director" required>
                     <?php foreach ($directors as $director) : ?>
                         <option value="<?php echo $director->id; ?>"><?php echo $director->name; ?></option>
                     <?php endforeach; ?>
@@ -61,12 +61,12 @@
             <div class="row">
                 <div class="col">
                     <label for="name" class="form-label">País de Origem:</label>
-                    <input type="text" name="country" class="form-control">
+                    <input type="text" name="country" class="form-control" required>
                 </div>
 
                 <div class="col">
                     <label for="name" class="form-label">Ano de lançamento:</label>
-                    <input type="text" name="year" class="form-control">
+                    <input type="text" name="year" class="form-control" required>
                 </div>
             </div>
 
@@ -80,6 +80,28 @@
         </form>
 
     </div>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 </body>
 
 </html>

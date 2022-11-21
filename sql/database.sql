@@ -16,10 +16,11 @@ CREATE TABLE login (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(255),
     password TEXT,
+    email VARCHAR(255),
     PRIMARY KEY (id)
 );
 
-INSERT INTO login (username, password) VALUES ('admin', '$2y$10$8sA2N5Sx/1zMQv2yrTDAaOFlbGWECrrgB68axL.hBb78NhQdyAqWm');
+INSERT INTO login (username, password, email) VALUES ('admin', '$2y$10$8sA2N5Sx/1zMQv2yrTDAaOFlbGWECrrgB68axL.hBb78NhQdyAqWm', 'admin.email@mail.com');
 
 CREATE TABLE reset (
     email VARCHAR(255),

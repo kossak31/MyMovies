@@ -15,7 +15,9 @@ if (!$login && $username == 'admin') {
     redirect('');
 } else {
     $queryBuilder->deleteById('movie', $id);
-    //delete image file
+    
+    Session::setInfo('alert-danger', "Apagou o filme");
     unlink('covers/' . $id . '.jpg');
+
     redirect('admin/filmes');
 }

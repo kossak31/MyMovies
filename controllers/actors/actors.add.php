@@ -26,7 +26,7 @@ if (!empty($_POST)) {
 
 
 
-    Session::setInfo('alert-primary', 'foi inserido um ator chamado' . "<b>" . $_POST['name'] . "</b>");
+    Session::setInfo('alert-primary', 'foi inserido um ator chamado ' . "<b>" . $_POST['name'] . "</b>");
 
 
 

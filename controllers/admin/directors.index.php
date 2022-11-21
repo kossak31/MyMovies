@@ -8,11 +8,8 @@ use App\Session;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-$movies = $queryBuilder->getAll('movie', 'App\Model\Movie');
+$directors = $queryBuilder->getAll('director', 'App\Model\Director');
 
-foreach ($movies as $movie) {
-    $movie->genres = $queryBuilder->findByMovieId('genre', $movie->id, 'App\Model\Genre');
-}
 
 $login = Session::get('login');
 $username = Session::get('username');
@@ -21,5 +18,5 @@ $username = Session::get('username');
 if (!$login && $username == 'admin') {
     redirect('');
 } else {
-    require 'views/admin/movies.index.php';
+    require 'views/admin/directors.index.php';
 }

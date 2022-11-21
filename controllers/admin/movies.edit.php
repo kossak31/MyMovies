@@ -10,21 +10,30 @@ use App\Model\Movie;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-$genres = $queryBuilder->getAll('genre', 'App\Model\Genre');
+$genres = $queryBuilder->getAll('genre');
+$actors = $queryBuilder->getAll('actor');
+$directors = $queryBuilder->getAll('director');
 
 $movie = $queryBuilder->findById('movie', $id, 'App\Model\Movie');
 
-$genre = $queryBuilder->findByMovieId('genre', $movie->id, 'App\Model\Genre');
+$genrex = $queryBuilder->findByMovieId('genre', $movie->id);
+
+$actorx = $queryBuilder->findByActorId('actor', $movie->id);
+
+foreach ($directors as $director) {
+    $movie_director = $queryBuilder->findById('director', $movie->director_id);
+}
 
 $login = Session::get('login');
 $username = Session::get('username');
 
-require "views/admin/movies.edit.php";
 
 
 if (!empty($_POST)) {
-
+    
     $livro = new Movie();
-    $queryBuilder->update($livro);
+    $queryBuilder->updateMovie($livro);
     redirect('admin/filmes');
 }
+
+require "views/admin/movies.edit.php";

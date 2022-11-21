@@ -18,16 +18,16 @@ $passwordFromDB = $queryBuilder->returnHashPassword($user);
 
 if (password_verify($passwordPOST, $passwordFromDB)) {
 
-    
+
     Session::set('login', true);
     Session::set('username', $user);
 
- 
+
     redirect('');
-
 } else {
-    
-    Session::set('login', false);
-    echo 'password errada.';
-}
 
+    Session::setInfo('alert-danger', 'falhou o login');
+
+    
+redirect('');
+}

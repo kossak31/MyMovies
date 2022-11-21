@@ -83,13 +83,56 @@ class QueryBuilder
             }
         }
     }
+    //update movie
+    public function updateMovie($movie)
+    {
+        $stmt = $this->pdo->prepare("UPDATE movie SET name=:name, year=:year, country=:country, director_id=:director_id WHERE id=:id");
+        $stmt->execute([
+            'id' => $movie->id,
+            'name' => $movie->name,
+            'year' => $movie->year,
+            'country' => $movie->country,
+            'director_id' => $movie->director_id
+        ]);
 
+        $stmt = $this->pdo->prepare("DELETE FROM genremovie WHERE movie_id=:movie_id");
+        $stmt->execute(['movie_id' => $movie->id]);
+
+        foreach ($movie->genre as $genre) {
+            $stmt = $this->pdo->prepare("INSERT INTO genremovie (movie_id, genre_id) VALUES (:movie_id, :genre_id)");
+            $stmt->execute(['movie_id' => $movie->id, 'genre_id' => $genre]);
+        }
+
+        $stmt = $this->pdo->prepare("DELETE FROM actormovie WHERE movie_id=:movie_id");
+        $stmt->execute(['movie_id' => $movie->id]);
+
+        foreach ($movie->actor as $actor) {
+            $stmt = $this->pdo->prepare("INSERT INTO actormovie (movie_id, actor_id) VALUES (:movie_id, :actor_id)");
+            $stmt->execute(['movie_id' => $movie->id, 'actor_id' => $actor]);
+        }
+    }
     //inserir ator
     public function insertActor($actor)
     {
         $stmt = $this->pdo->prepare("INSERT INTO actor (name) VALUES (:name)");
         $stmt->execute([
             'name' => $actor->name,
+        ]);
+    }
+
+    public function insertDirector($director)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO director (name) VALUES (:name)");
+        $stmt->execute([
+            'name' => $director->name,
+        ]);
+    }
+
+    public function insertGenre($genre)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO genre (name) VALUES (:name)");
+        $stmt->execute([
+            'name' => $genre->name,
         ]);
     }
 
@@ -102,6 +145,28 @@ class QueryBuilder
             'id' => $actor->id
         ]);
     }
+
+    public function updateDirector($director)
+    {
+        $stmt = $this->pdo->prepare("UPDATE director SET name=:name WHERE id=:id");
+        $stmt->execute([
+            'name' => $director->name,
+            'id' => $director->id
+        ]);
+    }
+
+
+
+    public function updateGenre($genre)
+    {
+        $stmt = $this->pdo->prepare("UPDATE genre SET name=:name WHERE id=:id");
+        $stmt->execute([
+            'name' => $genre->name,
+            'id' => $genre->id
+        ]);
+    }
+
+
 
     // selecionar ultimo registo
     public function getLast($table, $class = "StdClass")
@@ -138,6 +203,8 @@ class QueryBuilder
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
+  
+
     // encontrar genero id
     public function findByGenreId($table, $id, $class = "StdClass")
     {
@@ -171,9 +238,6 @@ class QueryBuilder
         $stmt->execute(['id' => $id]);
         return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
-
-
-
 
 
 
@@ -222,5 +286,4 @@ class QueryBuilder
         $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE code=:code");
         $stmt->execute(['password' => $hash, 'code' => $code]);
     }
-
 }

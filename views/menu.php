@@ -130,6 +130,14 @@
             <td class="maintd">
                 <div id="news">
 
+                    <?php if (\App\Session::has('info')) : ?>
+                        <div class="alert <?php echo \App\Session::getInfo()['type']; ?>" role="alert">
+                            <?php echo \App\Session::getInfo()['msg']; ?>
+                        </div>
+                        <?php unset($_SESSION['info']); ?>
+                    <?php endif; ?>
+
+
                     <div class="d-flex justify-content-center">
                         <img src="img/logo.png" width="300px" height="150px">
                     </div>

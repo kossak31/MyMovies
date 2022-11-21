@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Nome do Género:</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
             </div>
 
 

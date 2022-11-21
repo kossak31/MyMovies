@@ -15,15 +15,11 @@
 
     <div class="container">
 
-        <form action="<?php echo route('filmes') ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo route('realizadores') ?>" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome do Realizador:</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
             </div>
-
-
-
-
 
             <button type="submit" class="btn btn-primary">Inserir Realizador</button>
         </form>

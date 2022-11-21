@@ -119,7 +119,7 @@ $router->get('admin/generos', function () {
 });
 
 $router->patch('generos/(\d+)', function ($id) {
-    require "controllers/admin/generos.edit.php";
+    require "controllers/admin/genres.edit.php";
 });
 
 $router->get('admin/atores', function () {

@@ -16,6 +16,7 @@ $lastMovie = $queryBuilder->getLast('movie', 'App\Model\Movie');
 $randomMovie = $queryBuilder->getRandom('movie', 'App\Model\Movie');
 
 
+
 $login = Session::get('login');
 $username = Session::get('username');
 

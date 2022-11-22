@@ -12,8 +12,8 @@ if ($_POST) {
     $password = $_POST['pass1'];
     $password2 = $_POST['pass2'];
     if ($password == $password2) {
-      
-        $queryBuilder->insertHashPassword($_POST['code'], password_hash($password, PASSWORD_DEFAULT));
+
+        $queryBuilder->insertHashPassword($_POST['email'], password_hash($password, PASSWORD_DEFAULT));
         redirect('');
-    } 
+    }
 }

@@ -281,9 +281,9 @@ class QueryBuilder
         return $stmt->fetch();
     }
 
-    public function insertHashPassword($code, $hash)
+    public function insertHashPassword($email, $password)
     {
-        $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE code=:code");
-        $stmt->execute(['password' => $hash, 'code' => $code]);
+        $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE email=:email");
+        $stmt->execute(['password' => $password, 'email' => $email]);
     }
 }

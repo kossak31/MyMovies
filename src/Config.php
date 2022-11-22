@@ -8,8 +8,8 @@ class Config {
     const DBUSERPASS = '';
     const DBDATABASE = 'movies';
 
-    const MAILTRAP_USER='92e02cb13ba586';
-    const MAILTRAP_PASS='9d6275cc128e28';
+    const MAILTRAP_USER='f1a20553be37da';
+    const MAILTRAP_PASS='6e62729c0b8415';
 
     const APPURL = 'http://localhost/Movies';
 }

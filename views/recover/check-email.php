@@ -35,8 +35,16 @@
     <div class="container">
         <div class="row">
 
-        <?php if(isset($msg)){echo $msg;}?>
-        <?php if(isset($error)){echo $error;}?>
+
+            <?php if (\App\Session::has('info')) : ?>
+                <div class="alert <?php echo \App\Session::getInfo()['type']; ?>" role="alert">
+                    <?php echo \App\Session::getInfo()['msg']; ?>
+                </div>
+                <?php unset($_SESSION['info']); ?>
+            <?php endif; ?>
+
+
+
 
             <main class="form-signin w-100 m-auto">
 
@@ -45,7 +53,7 @@
                     <h3 class="mb-3">Recuperar password</h3>
 
                     <div class="mb-3">
-                        <input type="text" name="email" placeholder="Escreva o seu e-mail" class="form-control">
+                        <input type="email" name="email" placeholder="Escreva o seu e-mail" class="form-control" required>
 
                     </div>
                     <div class="mb-3">

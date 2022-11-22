@@ -37,9 +37,9 @@
 
             <form action="reset-password" method="POST">
                 <h4>Indique a nova password:</h4>
-                <input type="text" name="pass1" class="form-control" placeholder="Nova password" required>
-                <input type="text" name="pass2" class="form-control mt-2" placeholder="Repetir password password" required>
-                <input type="text" name="code" value="<?php echo $_GET['code']; ?>">
+                <input type="password" name="pass1" class="form-control" placeholder="Nova password" required>
+                <input type="password" name="pass2" class="form-control mt-2" placeholder="Repetir password password" required>
+                <input type="hidden" name="email" value="<?php echo $_GET['email']; ?>">
                 <input type="submit" name="reset" value="Reset Password" class="form-control btn btn-warning mt-2">
             </form>
 

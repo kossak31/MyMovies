@@ -28,12 +28,12 @@ class Recover
             $mail->Port       = 2525;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('recoverpassword@example.com', 'Recover Password');
+            $mail->setFrom('password@example.com', 'MyMovie - Password');
             $mail->addAddress($email);     //Add a recipient
             
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'PASSWORD RECOVER';
+            $mail->Subject = 'PASSWORD SYSTEM MyMovies';
             $mail->Body    = $msg;
             
 

@@ -8,7 +8,8 @@
         <div class="collapse navbar-collapse" id="navbarsExample03">
             <ul class="navbar-nav me-auto mb-2 mb-sm-0">
 
-                <?php if ($login == false && $username != 'admin') : ?>
+                <!-- menu user -->
+                <?php if ($username != 'admin') : ?>
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo route('filmes'); ?>">Listar Filmes</a>
@@ -23,6 +24,8 @@
                     </li>
 
                 <?php endif; ?>
+
+                <!-- menu admin -->
                 <?php if ($login == true && $username == 'admin') : ?>
 
                     <li class="nav-item dropdown">

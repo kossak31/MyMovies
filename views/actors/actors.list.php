@@ -22,12 +22,12 @@
                 <?php foreach ($actors as $actor) : ?>
                     <div class="col-3">
 
-                        <div class="card" style="width: 18rem;">
+                        <div class="card my-3">
                             
                             <div class="card-body">
                                 <h5 class="card-title"><?= $actor->name ?></h5>
                                 <div class="d-grid gap-2">
-                                    <a href="<?php echo route('atores/' . $actor->id); ?>" class="btn btn-primary">Ver Filmes</a>
+                                    <a href="<?php echo route('atores/' . $actor->id); ?>" class="btn btn-primary">Listar Filmes</a>
                                 </div>
                             </div>
                         </div>

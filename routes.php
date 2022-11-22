@@ -243,9 +243,17 @@ $router->get('logout', function () {
     require 'controllers/logout.php';
 });
 
+$router->post('new-user', function () {
+    require 'controllers/new-user/new-user.php';
+});
 
+$router->get('autologin\?email\=(\\S+@\\S+\\.\\S+)\&token=(\w+)', function () {
+    require 'controllers/new-user/new-password.php';
+});
 
-
+$router->post('set-password', function () {
+    require 'controllers/new-user/set-password.php';
+});
 
 
 
@@ -265,12 +273,10 @@ $router->get('status', function () {
 //formulario de recuperação de password por email
 $router->get('check-email', function () {
     require 'views/recover/check-email.php';
-    
 });
 
 $router->post('check-email', function () {
     require 'controllers/recover/check-email.php';
-   
 });
 
 //link de recuperação de password
@@ -286,44 +292,4 @@ $router->post('reset-password', function () {
 //search 
 $router->get('search\?search\=(\w+)', function () {
     require 'controllers/search.php';
-});
-
-
-
-//por apagar
-//ver todos os livros
-$router->get('livros', function () {
-    require 'controllers/livros.index.php';
-});
-
-//show 1 livro
-$router->get('livros/(\d+)', function ($id) {
-    require "controllers/livros/livros.show.php";
-});
-
-//formulario inserir
-$router->get('livros/create', function () {
-    require "controllers/livros/add.php";
-    require "views/livros/create.form.php";
-});
-
-//POST inserir
-$router->post('livros', function () {
-    require "controllers/livros/add.php";
-});
-
-
-$router->get('livros/(\d+)/edit', function ($id) {
-    require "controllers/livros/edit.php";
-});
-
-//update
-$router->patch('livros/(\d+)', function ($id) {
-    require "controllers/livros/edit.php";
-    redirect('livros');
-});
-
-//delete
-$router->delete('livros/(\d+)', function ($id) {
-    require "controllers/livros/delete.php";
 });

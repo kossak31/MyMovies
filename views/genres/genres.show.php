@@ -22,8 +22,8 @@
                 <?php foreach ($movies as $movie) : ?>
                     <div class="col-3">
 
-                        <div class="card" style="width: 18rem;">
-                            <img src="../covers/<?php echo $movie->movie_id; ?>.jpg" onerror="this.src='../img/dvd-cover.jpg'">
+                        <div class="card">
+                            <img height="390" src="../covers/<?php echo $movie->movie_id; ?>.jpg" onerror="this.src='../img/dvd-cover.jpg'">
                             <div class="card-body">
                                 <a href="<?php echo route('filmes/' . $movie->movie_id); ?>" class="d-flex justify-content-center btn btn-primary"><?php echo $movie->name; ?></a>
                             </div>

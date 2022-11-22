@@ -203,7 +203,7 @@ class QueryBuilder
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
-  
+
 
     // encontrar genero id
     public function findByGenreId($table, $id, $class = "StdClass")
@@ -282,6 +282,35 @@ class QueryBuilder
     }
 
     public function insertHashPassword($email, $password)
+    {
+        $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE email=:email");
+        $stmt->execute(['password' => $password, 'email' => $email]);
+    }
+
+    //registar novo utilizador
+    public function registerUsernameAndEmail($username, $email)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO login(username, email) VALUES (:username, :email)");
+        $stmt->execute(['username' => $username, 'email' => $email]);
+    }
+    //verfica se existe email
+    public function checkEmail($email)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM login WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch();
+    }
+
+    //verfica se existe email
+    public function checkUsername($username)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM login WHERE username = :username");
+        $stmt->execute(['username' => $username]);
+        return $stmt->fetch();
+    }
+
+    //save password by email and username
+    public function savePassword($email, $password)
     {
         $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE email=:email");
         $stmt->execute(['password' => $password, 'email' => $email]);

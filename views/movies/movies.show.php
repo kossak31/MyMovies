@@ -53,7 +53,7 @@
 
                                 <div style="margin-top: 6px;"><b>Género:</b><br>
                                     <?php foreach ($genresMovie as $genre) : ?>
-                                        <a href="<?php echo route('genero/' . $genre->genre_id); ?>"><?= $genre->name ?></a><br>
+                                        <a href="<?php echo route('generos/' . $genre->genre_id); ?>"><?= $genre->name ?></a><br>
                                     <?php endforeach; ?>
                                 </div>
 
@@ -62,6 +62,10 @@
                                     <?php echo $movie->country; ?>
                                 </div>
 
+
+                                <div style="margin-top: 6px;"><b>Trailer:</b><br>
+                                   <a target=”_blank” href="https://youtube.com/embed/<?php echo $movie->trailer; ?>">Link youtube</a>
+                                </div>
 
 
 

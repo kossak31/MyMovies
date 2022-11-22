@@ -15,5 +15,8 @@ if ($_POST) {
 
         $queryBuilder->insertHashPassword($_POST['email'], password_hash($password, PASSWORD_DEFAULT));
         redirect('');
+    }else {
+        Session::setInfo('alert-warning', 'Password nao sao iguais');
+        redirect('reset-password?email='.$_GET['email'].'&code='.$_POST['code']);
     }
 }

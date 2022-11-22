@@ -177,6 +177,43 @@
                 <div class="menuright">
                     <?php if ($login == false) : ?>
 
+                        <div align="center" style="margin-top: 5px; margin-bottom: 5px;">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Novo Utilizador
+                            </a>
+                        </div>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Insira um utilizador e e-mail</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="<?php echo route('new-user'); ?>" method="POST">
+
+                                        <div class="mb-3">
+                                                <input type="text" name="username" class="form-control" placeholder="username" require>
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="email" name="email" class="form-control" placeholder="email" require>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary">Novo Registo</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                         <form action="<?php echo route('login'); ?>" method="POST">
                             <table align="center">
                                 <tr>

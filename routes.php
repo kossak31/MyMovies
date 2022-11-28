@@ -293,3 +293,7 @@ $router->post('reset-password', function () {
 $router->get('search\?search\=(\w+)', function () {
     require 'controllers/search.php';
 });
+
+$router->post('favoritos', function () {
+    require 'controllers/favorite.php';
+});

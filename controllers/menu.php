@@ -17,7 +17,12 @@ $randomMovie = $queryBuilder->getRandom('movie', 'App\Model\Movie');
 
 
 
+
+
 $login = Session::get('login');
 $username = Session::get('username');
+
+
+
 
 require 'views/menu.php';

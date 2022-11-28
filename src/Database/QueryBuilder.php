@@ -309,10 +309,47 @@ class QueryBuilder
         return $stmt->fetch();
     }
 
-    //save password by email and username
+    //update password e email
     public function savePassword($email, $password)
     {
         $stmt = $this->pdo->prepare("UPDATE login SET password=:password WHERE email=:email");
         $stmt->execute(['password' => $password, 'email' => $email]);
+    }
+
+    //salvar favoritos
+    public function saveFavorite($user_id, $movie_id)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO favorite(user_id, movie_id) VALUES (:user_id, :movie_id)");
+        $stmt->execute(['user_id' => $user_id, 'movie_id' => $movie_id]);
+    }
+
+    //user id
+    public function getUserId($username)
+    {
+        $stmt = $this->pdo->prepare("SELECT id FROM login WHERE username=:username");
+        $stmt->execute(['username' => $username]);
+        return $stmt->fetch();
+    }
+
+    
+    public function getMoviesNameByUserId($user_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM favorite INNER JOIN movie ON favorite.movie_id = movie.id WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
+    }
+
+
+    public function checkFavorite($user_id, $movie_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM favorite WHERE user_id = :user_id AND movie_id = :movie_id");
+        $stmt->execute(['user_id' => $user_id, 'movie_id' => $movie_id]);
+        return $stmt->fetch();
+    }
+
+    public function deleteFavorite($user_id, $movie_id)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM favorite WHERE user_id = :user_id AND movie_id = :movie_id");
+        $stmt->execute(['user_id' => $user_id, 'movie_id' => $movie_id]);
     }
 }

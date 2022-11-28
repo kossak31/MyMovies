@@ -48,6 +48,15 @@ CREATE TABLE director (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE favorite (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    movie_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (movie_id) REFERENCES movie(id),
+    FOREIGN KEY (user_id) REFERENCES login(id)
+);
+
 CREATE TABLE movie (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
@@ -131,6 +140,10 @@ INSERT INTO actor (name) VALUES ('Richard Dreyfuss');
 INSERT INTO actor (name) VALUES ('Sam Neil');
 INSERT INTO actor (name) VALUES ('Laura Dern');
 INSERT INTO actor (name) VALUES ('Jeff Goldblum');
+INSERT INTO actor (name) VALUES ('Angelina Jolie');
+INSERT INTO actor (name) VALUES ('Matt Damon');
+INSERT INTO actor (name) VALUES ('Tom Cruise');
+INSERT INTO actor (name) VALUES ('Jamie Foxx');
 
 
 INSERT INTO director (name) VALUES ('Robert Zemeckis');
@@ -139,6 +152,11 @@ INSERT INTO director (name) VALUES ('Martin Scorsese');
 INSERT INTO director (name) VALUES ('David Leitch');
 INSERT INTO director (name) VALUES ('Quentin Tarantino');
 INSERT INTO director (name) VALUES ('Steven Spielberg');
+INSERT INTO director (name) VALUES ('Doug Liman');
+INSERT INTO director (name) VALUES ('Bian De Palma');
+INSERT INTO director (name) VALUES ('Michael Maan');
+INSERT INTO director (name) VALUES ('Cameron Crowe');
+
 
 
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Forrest Gump','bLvqoHBptjg','USA',1994,1);
@@ -150,6 +168,14 @@ INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Bullet Tr
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Kill Bill: Vol. 1','7kSuas6mRpk','USA',2003,5);
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jaws','U1fu_sA7XhE','USA',1975,6);
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jurassic Park','QWBKEmWWL38','USA',1993,6);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Mr. & Mrs. Smith','','USA',2005,7);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('The Bourne Identity','','USA',2002,7);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Mission: Impossible','','USA',1996,8);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Minority Report','','USA',2002,6);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Collateral','','USA',2004,9);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jerry Maguire','','USA',1996,10);
+
+
 
 
 INSERT INTO genremovie (movie_id, genre_id) VALUES (1, 6);
@@ -187,9 +213,26 @@ INSERT INTO genremovie (movie_id, genre_id) VALUES (9, 1);
 INSERT INTO genremovie (movie_id, genre_id) VALUES (9, 2);
 INSERT INTO genremovie (movie_id, genre_id) VALUES (9, 13);
 
+INSERT INTO genremovie (movie_id, genre_id) VALUES (10, 1);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (10, 6);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (10, 7);
 
 
+INSERT INTO genremovie (movie_id, genre_id) VALUES (11, 1);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (11, 22);
 
+INSERT INTO genremovie (movie_id, genre_id) VALUES (12, 1);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (12, 3);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (12, 22);
+
+INSERT INTO genremovie (movie_id, genre_id) VALUES (13, 1);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (13, 7);
+
+INSERT INTO genremovie (movie_id, genre_id) VALUES (14, 1);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (14, 9);
+
+INSERT INTO genremovie (movie_id, genre_id) VALUES (15, 10);
+INSERT INTO genremovie (movie_id, genre_id) VALUES (15, 19);
 
 
 INSERT INTO actormovie (movie_id, actor_id) VALUES (1, 1);
@@ -228,9 +271,18 @@ INSERT INTO actormovie (movie_id, actor_id) VALUES (9, 22);
 INSERT INTO actormovie (movie_id, actor_id) VALUES (9, 23);
 INSERT INTO actormovie (movie_id, actor_id) VALUES (9, 24);
 
+INSERT INTO actormovie (movie_id, actor_id) VALUES (10, 3);
+INSERT INTO actormovie (movie_id, actor_id) VALUES (10, 25);
 
+INSERT INTO actormovie (movie_id, actor_id) VALUES (11, 26);
 
+INSERT INTO actormovie (movie_id, actor_id) VALUES (12, 27);
 
+INSERT INTO actormovie (movie_id, actor_id) VALUES (13, 27);
+
+INSERT INTO actormovie (movie_id, actor_id) VALUES (14, 27);
+
+INSERT INTO actormovie (movie_id, actor_id) VALUES (15, 27);
 
 
 SET FOREIGN_KEY_CHECKS=1;

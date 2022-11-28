@@ -30,5 +30,7 @@ if ($checkusername || $checkemail) {
     $link2 = 'Entrar automaticamente no site <a " ' . $link . ' "> Link </a>';
 
     Recover::sendemail($email, $link2);
+    Session::setInfo('alert-warning', 'veja o seu email para definir password');
+
     redirect('');
 }

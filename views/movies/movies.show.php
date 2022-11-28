@@ -25,7 +25,6 @@
                         <tr>
                             <td>
                                 <img src="../covers/<?php echo $movie->id; ?>.jpg" width="150" height="200" style="margin: 3px 5px 0 0; max-width:220px; height:auto; width:auto;" onerror="this.src='../img/dvd-cover.jpg'">
-
                             </td>
                         </tr>
                     </table>
@@ -64,7 +63,7 @@
 
 
                                 <div style="margin-top: 6px;"><b>Trailer:</b><br>
-                                   <a target=”_blank” href="https://youtube.com/embed/<?php echo $movie->trailer; ?>">Link youtube</a>
+                                    <a target=”_blank” href="https://youtube.com/embed/<?php echo $movie->trailer; ?>">Link youtube</a>
                                 </div>
 
 

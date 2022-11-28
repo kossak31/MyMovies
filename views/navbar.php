@@ -5,7 +5,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExample03">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarsExample03">
+
+
             <ul class="navbar-nav me-auto mb-2 mb-sm-0">
 
                 <!-- menu user -->
@@ -127,7 +129,7 @@
                     </li>
 
 
-                    <li class="nav-item mr-auto">
+                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo route('logout'); ?>">Logout</a>
                     </li>
 
@@ -135,7 +137,27 @@
 
 
             </ul>
+            
+            <div id="x" class="navbar-nav">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0 dropstart">
+                    
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Favoritos
+                        </a>
+                        <ul id="lista_favoritos" class="dropdown-menu">
+                                <?php if (!empty($favoriteMovies) && $username == true) : ?>
+                                    <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
+                                        <li id="favorito<?php echo $favoriteMovie->id; ?>"><a class="dropdown-item" href="<?php echo route('filmes/' . $favoriteMovie->id); ?>"><?php echo $favoriteMovie->name; ?></a></li>
+                                    <?php endforeach; ?>
+                                
 
+                                    <?php endif; ?>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
         </div>
     </div>
 </nav>

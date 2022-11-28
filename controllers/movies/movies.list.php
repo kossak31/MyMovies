@@ -12,4 +12,15 @@ $movies = $queryBuilder->getAll('movie', 'App\Model\Movie');
 $login = Session::get('login');
 $username = Session::get('username');
 
+
+if ($login){
+
+    $user_id = $queryBuilder->getUserId($username);
+    $favoriteMovies = $queryBuilder->getMoviesNameByUserId($user_id['id']);
+}
+
+
+
+
+
 require 'views/movies/movie.list.php';

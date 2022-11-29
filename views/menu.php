@@ -143,8 +143,8 @@
                     </div>
 
                     <h2>onde encontrar o código fonte:</h2>
-                    <p> este projecto está no <a href="https://github.com/kossak31/MyMovies">github</a> pelo utilizador <b>kossak31</b> no seguinte repositório chamado <b>MyMovies</b></p>
-
+                    <p>este projecto em PHP está no <a href="https://github.com/kossak31/MyMovies">github</a> pelo utilizador <b>kossak31</b> no seguinte repositório chamado <b>MyMovies</b></p>
+                    <p>a base de dados é MySql e existe diagrama ER no seguinte <a href="sql/diagrama_ER.png">link</a>
                     <h3>Acerca do projecto:</h3>
 
                     <p>Esta plataforma permite inserir filmes, atores, géneros e realizadores numa base de dados MySQL usando um MVC simples.</p>
@@ -167,7 +167,12 @@
 
                     <p>Existe um sistema de alertas que permite ao utilizador saber se o filme foi inserido.</p>
 
-
+                    <p>para executar os seguintes testes do PHPUnit:</p>
+                    <ul>
+                        <li>phpunit --filter testRotas tests/RoutesTest.php</li>
+                        <li>phpunit --filter testRotaPOST tests/RoutesTest.php</li>
+                        <li>phpunit --filter testRotaDelete tests/RoutesTest.php</li>
+                    </ul>
 
                 </div>
             </td>
@@ -195,7 +200,7 @@
                                     <div class="modal-body">
                                         <form action="<?php echo route('new-user'); ?>" method="POST">
 
-                                        <div class="mb-3">
+                                            <div class="mb-3">
                                                 <input type="text" name="username" class="form-control" placeholder="username" require>
                                             </div>
                                             <div class="mb-3">

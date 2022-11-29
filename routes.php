@@ -204,7 +204,14 @@ $router->post('destroy_add_actions', function () {
     require "controllers/admin/ajax_destroy_add.php";
 });
 
+$router->post('destroy_delete_actions', function () {
+    require "controllers/admin/ajax_destroy_delete.php";
+});
 
+
+$router->post('destroy_edit_actions', function () {
+    require "controllers/admin/ajax_destroy_edit.php";
+});
 
 
 

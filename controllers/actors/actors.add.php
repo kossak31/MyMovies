@@ -9,30 +9,41 @@ use App\Model\Actor;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-if (!empty($_POST)) {
+$token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $actor = new Actor();
-    $actor->name = $_POST['name'];
-    
-    $queryBuilder->insertActor($actor);
-
-    $last = $queryBuilder->getLast('actor', 'App\Model\Actor');
-
-    $arr = array(
-        'id' => $last->id,
-        'type' => 'alert-primary',
-        'msg' => 'foi inserido um actor ' . "<b>" . $last->name . "</b>",
-    );
+if ($token !== $_SESSION['token']) {
+    // return 405 http status code
+    echo $_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed';
+    exit;
+} else {
 
 
 
-    Session::setInfo('alert-primary', 'foi inserido um ator chamado ' . "<b>" . $_POST['name'] . "</b>");
+    if (!empty($_POST)) {
+
+        $actor = new Actor();
+        $actor->name = $_POST['name'];
+
+        $queryBuilder->insertActor($actor);
+
+        $last = $queryBuilder->getLast('actor', 'App\Model\Actor');
+
+        $arr = array(
+            'id' => $last->id,
+            'type' => 'alert-primary',
+            'msg' => 'foi inserido um actor ' . "<b>" . $last->name . "</b>",
+        );
 
 
 
-    $_SESSION['actions']['add'][$last->id] = $arr;
+        Session::setInfo('alert-primary', 'foi inserido um ator chamado ' . "<b>" . $_POST['name'] . "</b>");
 
 
 
-    redirect('admin/atores');
+        $_SESSION['actions']['add'][$last->id] = $arr;
+
+
+
+        redirect('admin/atores');
+    }
 }

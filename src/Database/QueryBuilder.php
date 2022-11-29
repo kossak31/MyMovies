@@ -42,11 +42,12 @@ class QueryBuilder
 
     public function insertMovie($movie)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO movie (name, year, country, director_id) VALUES (:name, :year, :country, :director_id)");
+        $stmt = $this->pdo->prepare("INSERT INTO movie (name, year, country, trailer, director_id) VALUES (:name, :year, :country, :trailer, :director_id)");
         $stmt->execute([
             'name' => $movie->name,
             'year' => $movie->year,
             'country' => $movie->country,
+            'trailer' => $movie->trailer,
             'director_id' => $movie->director_id
         ]);
         $id = $this->pdo->lastInsertId();
@@ -86,12 +87,13 @@ class QueryBuilder
     //update movie
     public function updateMovie($movie)
     {
-        $stmt = $this->pdo->prepare("UPDATE movie SET name=:name, year=:year, country=:country, director_id=:director_id WHERE id=:id");
+        $stmt = $this->pdo->prepare("UPDATE movie SET name=:name, year=:year, country=:country, trailer=:trailer, director_id=:director_id WHERE id=:id");
         $stmt->execute([
             'id' => $movie->id,
             'name' => $movie->name,
             'year' => $movie->year,
             'country' => $movie->country,
+            'trailer' => $movie->trailer,
             'director_id' => $movie->director_id
         ]);
 
@@ -331,7 +333,7 @@ class QueryBuilder
         return $stmt->fetch();
     }
 
-    
+
     public function getMoviesNameByUserId($user_id)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM favorite INNER JOIN movie ON favorite.movie_id = movie.id WHERE user_id = :user_id");

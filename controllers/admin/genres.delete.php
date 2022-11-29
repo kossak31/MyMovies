@@ -13,7 +13,22 @@ $username = Session::get('username');
 if (!$login && $username == 'admin') {
     redirect('');
 } else {
-    $queryBuilder->deleteById('genre',$id);
     Session::setInfo('alert-danger', "Apagou o registo");
+
+
+    $genre = $queryBuilder->findById('genre', $id, 'App\Model\Genre');
+    
+    $arr = array(
+        'id' => $genre->id,
+        'type' => 'alert-danger',
+        'msg' => 'foi eleminado um género chamado ' . "<b>" . $genre->name . "</b>",
+    );
+
+
+    
+    $_SESSION['actions']['delete'][$genre->id] = $arr;
+
+
+    $queryBuilder->deleteById('genre',$id);
     redirect('admin/generos');
 }

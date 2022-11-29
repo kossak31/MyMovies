@@ -168,12 +168,12 @@ INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Bullet Tr
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Kill Bill: Vol. 1','7kSuas6mRpk','USA',2003,5);
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jaws','U1fu_sA7XhE','USA',1975,6);
 INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jurassic Park','QWBKEmWWL38','USA',1993,6);
-INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Mr. & Mrs. Smith','','USA',2005,7);
-INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('The Bourne Identity','','USA',2002,7);
-INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Mission: Impossible','','USA',1996,8);
-INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Minority Report','','USA',2002,6);
-INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Collateral','','USA',2004,9);
-INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jerry Maguire','','USA',1996,10);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Mr. & Mrs. Smith','CZ0B22z22pI','USA',2005,7);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('The Bourne Identity','FpKaB5dvQ4g','USA',2002,7);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Mission: Impossible','Ohws8y572KE','USA',1996,8);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Minority Report','lG7DGMgfOb8','USA',2002,6);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Collateral','JlcX_GXtf40','USA',2004,9);
+INSERT INTO movie (name, trailer, country, year, director_id) VALUES ('Jerry Maguire','7gZcQ6ddJF0','USA',1996,10);
 
 
 

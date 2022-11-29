@@ -18,11 +18,28 @@ $username = Session::get('username');
 
 
 if ($_POST) {
-    
+    $oldgenre = $queryBuilder->findById('genre', $_POST['id'], 'App\Model\Genre');
+
     $genre = new Genre();
     $genre->name = $_POST['name'];
     $genre->id = $_POST['id'];
     $queryBuilder->updateGenre($genre);
+
+
+
+
+    $arr = array(
+        'id' => $genre->id,
+        'type' => 'alert-warning',
+        'msg' => 'foi editado um género chamado ' . "<b>" . $oldgenre->name . "</b> para <b>" . $genre->name . "</b>",
+    );
+
+
+
+    $_SESSION['actions']['edit'][$genre->id] = $arr;
+
+    Session::setInfo('alert-warning', 'foi editado um género');
+
     redirect('admin/generos');
 }
 

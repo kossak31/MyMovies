@@ -19,11 +19,26 @@ $username = Session::get('username');
 
 if ($_POST) {
 
+    $olddirector = $queryBuilder->findById('director', $_POST['id'], 'App\Model\Director');
+
+
     $director = new Director();
     $director->name = $_POST['name'];
     $director->id = $_POST['id'];
     $queryBuilder->updateDirector($director);
-    Session::setInfo('alert-warning', 'foi editado um realizado');
+    Session::setInfo('alert-warning', 'foi editado um realizador');
+
+
+    $arr = array(
+        'id' => $director->id,
+        'type' => 'alert-warning',
+        'msg' => 'foi editado um género chamado ' . "<b>" . $olddirector->name . "</b> para <b>" . $director->name . "</b>",
+    );
+
+
+
+    $_SESSION['actions']['edit'][$director->id] = $arr;
+
 
     redirect('admin/realizadores');
 }

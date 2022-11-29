@@ -9,35 +9,46 @@ use App\Model\Movie;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-if (!empty($_POST)) {
 
-    $movie = new Movie();
-    $movie->name = $_POST['name'];
-    //$movie->genre = $_POST['genre'];
-    //$movie->actor = $_POST['actor'];
-    $movie->year = $_POST['year'];
-    $movie->country = $_POST['country'];
-    $movie->director_id = $_POST['director_id'];
-    
-    $queryBuilder->insertMovie($movie);
+$token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $last = $queryBuilder->getLast('movie', 'App\Model\Movie');
-
-    $arr = array(
-        'id' => $last->id,
-        'type' => 'alert-primary',
-        'msg' => 'foi inserido um filme ' . "<b>" . $last->name . "</b>",
-    );
+if ($token !== $_SESSION['token']) {
+    // return 405 http status code
+    echo $_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed';
+    exit;
+} else {
 
 
+    if (!empty($_POST)) {
 
-    Session::setInfo('alert-primary', 'foi inserido um filme chamado ' . "<b>" . $_POST['name'] . "</b>");
+        $movie = new Movie();
+        $movie->name = $_POST['name'];
+        //$movie->genre = $_POST['genre'];
+        //$movie->actor = $_POST['actor'];
+        $movie->year = $_POST['year'];
+        $movie->country = $_POST['country'];
+        $movie->director_id = $_POST['director_id'];
+
+        $queryBuilder->insertMovie($movie);
+
+        $last = $queryBuilder->getLast('movie', 'App\Model\Movie');
+
+        $arr = array(
+            'id' => $last->id,
+            'type' => 'alert-primary',
+            'msg' => 'foi inserido um filme ' . "<b>" . $last->name . "</b>",
+        );
 
 
 
-    $_SESSION['actions']['add'][$last->id] = $arr;
+        Session::setInfo('alert-primary', 'foi inserido um filme chamado ' . "<b>" . $_POST['name'] . "</b>");
 
 
 
-    redirect('admin/filmes');
+        $_SESSION['actions']['add'][$last->id] = $arr;
+
+
+
+        redirect('admin/filmes');
+    }
 }

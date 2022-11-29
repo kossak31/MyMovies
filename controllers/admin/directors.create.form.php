@@ -21,5 +21,6 @@ $username = Session::get('username');
 if (!$login) {
     redirect('');
 } else {
+    Session::generateToken();
     require 'views/directors/create.form.php';
 }

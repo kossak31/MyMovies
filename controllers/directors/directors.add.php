@@ -9,30 +9,40 @@ use App\Model\Director;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-if (!empty($_POST)) {
+$token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $director = new Director();
-    $director->name = $_POST['name'];
-    
-    $queryBuilder->insertDirector($director);
-
-    $last = $queryBuilder->getLast('director', 'App\Model\Director');
-
-    $arr = array(
-        'id' => $last->id,
-        'type' => 'alert-primary',
-        'msg' => 'foi inserido um filme ' . "<b>" . $last->name . "</b>",
-    );
+if ($token !== $_SESSION['token']) {
+    // return 405 http status code
+    echo $_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed';
+    exit;
+} else {
 
 
+    if (!empty($_POST)) {
 
-    Session::setInfo('alert-primary', 'foi inserido um realizador chamado ' . "<b>" . $_POST['name'] . "</b>");
+        $director = new Director();
+        $director->name = $_POST['name'];
+
+        $queryBuilder->insertDirector($director);
+
+        $last = $queryBuilder->getLast('director', 'App\Model\Director');
+
+        $arr = array(
+            'id' => $last->id,
+            'type' => 'alert-primary',
+            'msg' => 'foi inserido um filme ' . "<b>" . $last->name . "</b>",
+        );
 
 
 
-    $_SESSION['actions']['add'][$last->id] = $arr;
+        Session::setInfo('alert-primary', 'foi inserido um realizador chamado ' . "<b>" . $_POST['name'] . "</b>");
 
 
 
-    redirect('admin/realizadores');
+        $_SESSION['actions']['add'][$last->id] = $arr;
+
+
+
+        redirect('admin/realizadores');
+    }
 }

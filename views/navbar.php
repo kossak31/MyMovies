@@ -137,27 +137,31 @@
 
 
             </ul>
-            
-            <div id="x" class="navbar-nav">
-                <ul class="navbar-nav me-auto mb-2 mb-sm-0 dropstart">
-                    
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Favoritos
-                        </a>
-                        <ul id="lista_favoritos" class="dropdown-menu">
-                                <?php if (!empty($favoriteMovies) && $username == true) : ?>
-                                    <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
-                                        <li id="favorito<?php echo $favoriteMovie->id; ?>"><a class="dropdown-item" href="<?php echo route('filmes/' . $favoriteMovie->id); ?>"><?php echo $favoriteMovie->name; ?></a></li>
-                                    <?php endforeach; ?>
-                                
 
-                                    <?php endif; ?>
+            <?php if ( $username == true &&  "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] == 'http://localhost/Movies/filmes') : ?>
+                <div class="lista navbar-nav">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0 dropstart">
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Favoritos
+                            </a>
+                            <ul id="lista_favoritos" class="dropdown-menu">
+                            
+                            <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
+                                    <li id="favorito<?php echo $favoriteMovie->id; ?>"><a class="dropdown-item" href="<?php echo route('filmes/' . $favoriteMovie->id); ?>"><?php echo $favoriteMovie->name; ?></a></li>
+                                <?php endforeach; ?>
+
+
                             </ul>
                         </li>
                     </ul>
                 </div>
+            <?php endif; ?>
+
+
+
         </div>
     </div>
 </nav>

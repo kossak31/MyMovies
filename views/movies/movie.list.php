@@ -63,13 +63,6 @@
         <div class="row">
             <h1>Listar Filmes</h1>
 
-            <?php foreach ($movies as $movie) : ?>
-                <?php $moviesarray[] = $movie->name; ?>
-            <?php endforeach ?>
-            <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
-                <?php $favarray[] = $favoriteMovie->name; ?>
-            <?php endforeach ?>
-
 
 
 
@@ -78,6 +71,16 @@
 
 
             <?php if ($login == true &&  !empty($favoriteMovie)) : ?>
+
+
+
+                <?php foreach ($movies as $movie) : ?>
+                    <?php $moviesarray[] = $movie->name; ?>
+                <?php endforeach ?>
+                <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
+                    <?php $favarray[] = $favoriteMovie->name; ?>
+                <?php endforeach ?>
+
 
                 <!-- vista com filmes favoritos -->
                 <?php foreach ($movies as $key => $movie) : ?>
@@ -103,7 +106,9 @@
 
 
 
-            <?php else : ?>
+            <?php elseif (
+                $login == true && empty($favoriteMovie)
+            ) : ?>
                 <!-- vista sem filmes favoritos -->
                 <?php foreach ($movies as $movie) : ?>
                     <div class="col-3 d-flex justify-content-center">
@@ -125,6 +130,28 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+            <?php else : ?>
+                <!-- listar filmes -->
+                <?php foreach ($movies as $movie) : ?>
+                    <div class="col-3 d-flex justify-content-center">
+
+                        <div class="card my-2">
+
+                            <div id="<?php echo $movie->id; ?>">
+                                <img src="covers/<?php echo $movie->id; ?>.jpg" width="250" height="300" onerror="this.src='img/dvd-cover.jpg'">
+
+                            </div>
+
+
+                            <div class="card-body">
+
+                                <div class="d-grid gap-2">
+                                    <a href="<?php echo route('filmes/' . $movie->id); ?>" class="btn btn-primary"><?php echo $movie->name ?></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             <?php endif ?>
         </div>
     </div>
@@ -132,15 +159,21 @@
     <script>
         $(document).ready(function() {
 
-
-
-            if ($("#lista_favoritos").children().length <= 0) {
-                $("#lista_favoritos").hide();
+            if ($("#lista_favoritos").children().length == 0) {
+                $(".lista").hide();
             }
 
 
             $(".favoritos").click(function() {
                 var id = $(this).attr('id');
+
+                $(".lista").show();
+                if ($("#lista_favoritos").children().length > 1) {
+                    $(".lista").show();
+                } else {
+                    $(".lista").hide();
+                }
+
 
 
 

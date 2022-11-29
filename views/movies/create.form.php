@@ -19,9 +19,10 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Nome do Filme:</label>
                 <input type="text" name="name" class="form-control" required>
+                <?php inputToken(); ?>
             </div>
-            
-            
+
+
 
             <div class="row">
 
@@ -60,19 +61,38 @@
 
             <div class="row">
                 <div class="col">
-                    <label for="name" class="form-label">País de Origem:</label>
-                    <input type="text" name="country" class="form-control" required>
+                    <label>País de Origem:</label>
+                    <select class="form-select" name="country" required>
+                        <option selected>Selecionar País</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="USA">USA</option>
+                        
+                    </select>
+                    
                 </div>
 
                 <div class="col">
-                    <label for="name" class="form-label">Ano de lançamento:</label>
-                    <input type="text" name="year" class="form-control" required>
+                    
+                
+                <label for="name" class="form-label">Ano de lançamento:</label>
+                    <select class="form-select" name="year" required>
+                        <option selected>Selecionar Ano</option>
+                        <?php for ($i = 2022; $i >= 1900; $i--) { ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php } ?>                        
+                    </select>
+                    
                 </div>
             </div>
 
             <div class="mb-3">
+                <label for="name" class="form-label">Trailer do Filme:</label>
+                <input type="text" name="trailer" class="form-control" required>                
+            </div>
+
+            <div class="mb-3">
                 <label for="formFile" class="form-label">Imagem de Capa:</label>
-                <input class="form-control" name="file" type="file">
+                <input class="form-control" name="file" type="file" accept="image/jpg">
             </div>
 
 
@@ -81,27 +101,7 @@
 
     </div>
 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-            'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
 </body>
 
 </html>

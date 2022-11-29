@@ -50,4 +50,13 @@ class Session
     {
         return isset($_SESSION[$key]);
     }
+
+    public static function generateToken()
+    {
+        $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+    }
+
+    public static function getToken(){
+        return $_SESSION['token'];
+    }
 }

@@ -8,6 +8,7 @@ $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
 
+
 $genres = $queryBuilder->getAll('genre', 'App\Model\Genre');
 
 $actors = $queryBuilder->getAll('actor', 'App\Model\Actor');
@@ -21,6 +22,7 @@ $username = Session::get('username');
 if (!$login) {
     redirect('');
 } else {
+    Session::generateToken();
     require 'views/genres/create.form.php';
 }
 

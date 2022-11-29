@@ -15,7 +15,22 @@ $username = Session::get('username');
 if (!$login && $username == 'admin') {
     redirect('');
 } else {
-    $queryBuilder->deleteById('actor', $id);
     Session::setInfo('alert-danger', "Apagou o registo");
+
+    $actor = $queryBuilder->findById('actor', $id, 'App\Model\Actor');
+    
+    $arr = array(
+        'id' => $actor->id,
+        'type' => 'alert-danger',
+        'msg' => 'foi eleminado um ator chamado ' . "<b>" . $actor->name . "</b>",
+    );
+
+
+    
+    $_SESSION['actions']['delete'][$actor->id] = $arr;
+
+
+
+    $queryBuilder->deleteById('actor', $id);
     redirect('admin/atores');
 }

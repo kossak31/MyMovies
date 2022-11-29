@@ -17,12 +17,11 @@
 
         <form action="<?php echo route('generos') ?>" method="POST">
 
-
             <div class="mb-3">
                 <label for="name" class="form-label">Nome do Género:</label>
                 <input type="text" name="name" class="form-control" required>
+                <?php inputToken(); ?>
             </div>
-
 
             <button type="submit" class="btn btn-primary">Inserir Género</button>
         </form>

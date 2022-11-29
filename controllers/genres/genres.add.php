@@ -9,30 +9,34 @@ use App\Model\Genre;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-if (!empty($_POST)) {
+$token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $genre = new Genre();
-    $genre->name = $_POST['name'];
-    
-    $queryBuilder->insertGenre($genre);
+if ($token !== $_SESSION['token']) {
+    // return 405 http status code
+    echo $_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed';
+    exit;
+} else {
 
-    $last = $queryBuilder->getLast('genre', 'App\Model\Genre');
+    if (!empty($_POST)) {
 
-    $arr = array(
-        'id' => $last->id,
-        'type' => 'alert-primary',
-        'msg' => 'foi inserido um género ' . "<b>" . $last->name . "</b>",
-    );
+        $genre = new Genre();
+        $genre->name = $_POST['name'];
 
-    $_SESSION['actions']['add'][$last->id] = $arr;
+        $queryBuilder->insertGenre($genre);
+
+        $last = $queryBuilder->getLast('genre', 'App\Model\Genre');
+
+        $arr = array(
+            'id' => $last->id,
+            'type' => 'alert-primary',
+            'msg' => 'foi inserido um género ' . "<b>" . $last->name . "</b>",
+        );
+
+        $_SESSION['actions']['add'][$last->id] = $arr;
 
 
-    Session::setInfo('alert-primary', 'foi inserido um género chamado ' . "<b>" . $_POST['name'] . "</b>");
+        Session::setInfo('alert-primary', 'foi inserido um género chamado ' . "<b>" . $_POST['name'] . "</b>");
 
-
-
-
-
-
-    redirect('admin/generos');
+        redirect('admin/generos');
+    }
 }

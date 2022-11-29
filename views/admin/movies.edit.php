@@ -97,6 +97,13 @@
                     <input type="text" name="year" class="form-control" value="<?php echo $movie->year; ?>" required>
                 </div>
             </div>
+       
+       
+            <div class="mb-3">
+                <label for="name" class="form-label">Trailer do Filme:</label>
+                <input type="text" name="trailer" class="form-control" value="<?php echo $movie->trailer; ?>" required>                
+            </div>
+       
             <button class="btn btn-primary" type="submit">Editar filme</button>
 
         </form>

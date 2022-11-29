@@ -18,11 +18,24 @@ $username = Session::get('username');
 
 
 if ($_POST) {
-    
+    $oldactor = $queryBuilder->findById('actor', $_POST['id'], 'App\Model\Actor');
+
     $actor = new Actor();
     $actor->name = $_POST['name'];
     $actor->id = $_POST['id'];
     $queryBuilder->updateActor($actor);
+
+    $arr = array(
+        'id' => $actor->id,
+        'type' => 'alert-warning',
+        'msg' => 'foi editado um género chamado ' . "<b>" . $oldactor->name . "</b> para <b>" . $actor->name . "</b>",
+    );
+
+
+
+    $_SESSION['actions']['edit'][$actor->id] = $arr;
+
+    Session::setInfo('alert-warning', 'foi editado um ator');
     redirect('admin/atores');
 }
 

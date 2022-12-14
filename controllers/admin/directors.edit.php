@@ -25,7 +25,13 @@ if ($_POST) {
     $director = new Director();
     $director->name = $_POST['name'];
     $director->id = $_POST['id'];
-    $queryBuilder->updateDirector($director);
+
+    $queryBuilder->update('director', [
+        'id' => $director->id,
+        'name' => $director->name
+    ]);
+
+
     Session::setInfo('alert-warning', 'foi editado um realizador');
 
 

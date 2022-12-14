@@ -21,6 +21,7 @@ $username = Session::get('username');
 if (!$login) {
     redirect('');
 } else {
+    Session::generateToken();
     require 'views/movies/create.form.php';
 }
 

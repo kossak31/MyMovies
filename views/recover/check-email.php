@@ -31,7 +31,7 @@
 
 
 
-<body>
+<body style="background-image: url('img/background.jpg');">
     <div class="container">
         <div class="row">
 

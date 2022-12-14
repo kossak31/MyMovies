@@ -170,8 +170,8 @@
                     <p>para executar os seguintes testes do PHPUnit:</p>
                     <ul>
                         <li>phpunit --filter testRotas tests/RoutesTest.php</li>
-                        <li>phpunit --filter testRotaPOST tests/RoutesTest.php</li>
-                        <li>phpunit --filter testRotaDelete tests/RoutesTest.php</li>
+                        <li>phpunit --filter testRotasPOST tests/RoutesTest.php</li>
+                        <li>phpunit --filter testRotasDelete tests/RoutesTest.php</li>
                     </ul>
 
                 </div>

@@ -23,10 +23,11 @@ if ($_POST) {
     $genre = new Genre();
     $genre->name = $_POST['name'];
     $genre->id = $_POST['id'];
-    $queryBuilder->updateGenre($genre);
 
-
-
+    $queryBuilder->update('genre', [
+        'id' => $genre->id,
+        'name' => $genre->name
+    ]);
 
     $arr = array(
         'id' => $genre->id,
@@ -40,7 +41,7 @@ if ($_POST) {
 
     Session::setInfo('alert-warning', 'foi editado um género');
 
-    redirect('admin/generos');
+    // redirect('admin/generos');
 }
 
 require "views/admin/genres.edit.php";

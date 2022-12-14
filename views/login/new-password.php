@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="background-image: url('img/background.jpg');">
 
     <form action="<?php echo route('set-password'); ?>" method="post">
         <input type="password" name="password1">

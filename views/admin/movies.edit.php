@@ -10,7 +10,7 @@
 </head>
 
 
-<body>
+<body style="background-image: url('img/background.jpg');">
 
     <?php require 'views/navbar.php'; ?>
 
@@ -29,6 +29,7 @@
                 <label for="exampleFormControlInput1" class="form-label">nome do filme</label>
                 <input type="text" name="nome" class="form-control" id="" value="<?php echo $movie->name; ?>">
             </div>
+
             <?php foreach ($genres as $genre) : ?>
                 <?php $array[] = $genre->name; ?>
             <?php endforeach ?>
@@ -51,15 +52,14 @@
 
                 <div class="col">
                     <label for="">Selecionar Atores:</label>
-                    <select class="form-select" name="actor[]" multiple required>
+                    <select class="form-select" name="actor_id[]" multiple required>
                         <?php foreach ($actors as $key => $actor) : ?>
-
-                            <option value="<?php echo $actor->id; ?>" <?php if (in_array($actorarray[$key], $y)) {
-                                                                            echo 'selected';
-                                                                        } ?>><?php echo $actor->name; ?></option>
+                            <option value="<?php echo $actor->id; ?>" <?php echo in_array($actorarray[$key], $y) ? 'selected' : ''; ?>><?php echo $actor->name; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
+
+
                 <div class="col">
                     <div class="mb-3">
                         <label for="" class="form-label">Selecionar Generos</label>
@@ -68,9 +68,7 @@
                                 <option value="<?php echo $genre->id; ?>" <?php echo in_array($array[$key], $z) ? 'selected' : ''; ?>><?php echo $genre->name; ?></option>
                             <?php endforeach; ?>
                         </select>
-
                     </div>
-
                 </div>
 
             </div>
@@ -97,13 +95,13 @@
                     <input type="text" name="year" class="form-control" value="<?php echo $movie->year; ?>" required>
                 </div>
             </div>
-       
-       
+
+
             <div class="mb-3">
                 <label for="name" class="form-label">Trailer do Filme:</label>
-                <input type="text" name="trailer" class="form-control" value="<?php echo $movie->trailer; ?>" required>                
+                <input type="text" name="trailer" class="form-control" value="<?php echo $movie->trailer; ?>" required>
             </div>
-       
+
             <button class="btn btn-primary" type="submit">Editar filme</button>
 
         </form>

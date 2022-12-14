@@ -23,7 +23,11 @@ if ($_POST) {
     $actor = new Actor();
     $actor->name = $_POST['name'];
     $actor->id = $_POST['id'];
-    $queryBuilder->updateActor($actor);
+
+    $queryBuilder->update($actor, [
+        'id' => $actor->id,
+        'name' => $actor->name
+    ]);
 
     $arr = array(
         'id' => $actor->id,

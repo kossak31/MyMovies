@@ -304,3 +304,8 @@ $router->get('search\?search\=(\w+)', function () {
 $router->post('favoritos', function () {
     require 'controllers/favorite.php';
 });
+
+
+$router->get('top-favoritos', function () {
+    require 'controllers/top-favorite.php';
+});

@@ -21,21 +21,23 @@ if ($token !== $_SESSION['token']) {
     if (!empty($_POST)) {
 
         $director = new Director();
-        $director->name = $_POST['name'];
+        $director->name = strip_tags($_POST['name']);
 
-        $queryBuilder->insertDirector($director);
-
+        $queryBuilder->insert('director', [
+            'name' => $director->name,
+        ]);
+        
         $last = $queryBuilder->getLast('director', 'App\Model\Director');
 
         $arr = array(
             'id' => $last->id,
             'type' => 'alert-primary',
-            'msg' => 'foi inserido um filme ' . "<b>" . $last->name . "</b>",
+            'msg' => 'foi inserido um filme ' . "<b>" . strip_tags($last->name) . "</b>",
         );
 
 
 
-        Session::setInfo('alert-primary', 'foi inserido um realizador chamado ' . "<b>" . $_POST['name'] . "</b>");
+        Session::setInfo('alert-primary', 'foi inserido um realizador chamado ' . "<b>" . strip_tags($_POST['name']) . "</b>");
 
 
 

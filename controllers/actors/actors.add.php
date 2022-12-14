@@ -22,21 +22,24 @@ if ($token !== $_SESSION['token']) {
     if (!empty($_POST)) {
 
         $actor = new Actor();
-        $actor->name = $_POST['name'];
+        $actor->name = strip_tags($_POST['name']);
 
-        $queryBuilder->insertActor($actor);
+        
+        $queryBuilder->insert('actor', [
+            'name' => $actor->name,
+        ]);
 
         $last = $queryBuilder->getLast('actor', 'App\Model\Actor');
 
         $arr = array(
             'id' => $last->id,
             'type' => 'alert-primary',
-            'msg' => 'foi inserido um actor ' . "<b>" . $last->name . "</b>",
+            'msg' => 'foi inserido um actor ' . "<b>" . strip_tags($last->name) . "</b>",
         );
 
 
 
-        Session::setInfo('alert-primary', 'foi inserido um ator chamado ' . "<b>" . $_POST['name'] . "</b>");
+        Session::setInfo('alert-primary', 'foi inserido um ator chamado ' . "<b>" . strip_tags($_POST['name']) . "</b>");
 
 
 

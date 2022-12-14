@@ -11,103 +11,103 @@
 </head>
 
 
-<body>
+<body style="background-image: url('img/background.jpg');">
 
     <?php require 'views/navbar.php'; ?>
 
     <div class="container">
 
 
-        <?php if (count($_SESSION['actions']['add'])>0 || count($_SESSION['actions']['delete'])>0 || count($_SESSION['actions']['edit']) >0) : ?>
-            <?php foreach ($_SESSION['actions']['add'] as $action) : ?>
 
-                <div id="myAlert<?php echo $action['id']; ?>" class="alert alert-dismissible fade show <?php echo $action['type']; ?>" role="alert">
-                    <?php echo $action['msg']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+        <?php if (isset($_SESSION['actions']['add']) && count($_SESSION['actions']['add']) > 0 || isset($_SESSION['actions']['delete']) && count($_SESSION['actions']['delete']) > 0 || isset($_SESSION['actions']['edit']) && count($_SESSION['actions']['edit']) > 0) : ?>
 
+            <?php if (isset($_SESSION['actions']['add'])) : ?>
+                <?php foreach ($_SESSION['actions']['add'] as $action) : ?>
 
+                    <div id="myAlert<?php echo $action['id']; ?>" class="alert alert-dismissible fade show <?php echo $action['type']; ?>" role="alert">
+                        <?php echo $action['msg']; ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
 
+                    <script>
+                        const myAlert<?php echo $action['id']; ?> = document.getElementById('myAlert<?php echo $action['id']; ?>')
+                        myAlert<?php echo $action['id']; ?>.addEventListener('closed.bs.alert', event => {
+                            $.ajax({
+                                url: 'destroy_add_actions',
+                                type: 'POST',
+                                data: {
+                                    id: <?php echo $action['id']; ?>
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                }
 
-
-
-                <script>
-                    const myAlert<?php echo $action['id']; ?> = document.getElementById('myAlert<?php echo $action['id']; ?>')
-                    myAlert<?php echo $action['id']; ?>.addEventListener('closed.bs.alert', event => {
-                        $.ajax({
-                            url: 'destroy_add_actions',
-                            type: 'POST',
-                            data: {
-                                id: <?php echo $action['id']; ?>
-                            },
-                            success: function(data) {
-                                console.log(data);
-                            }
-
-                        })
-
-                    })
-                </script>
-            <?php endforeach ?>
-
-
-            <?php foreach ($_SESSION['actions']['delete'] as $action) : ?>
-
-                <div id="delete<?php echo $action['id']; ?>" class="alert alert-dismissible fade show <?php echo $action['type']; ?>" role="alert">
-                    <?php echo $action['msg']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-
-
-                <script>
-                    const delete<?php echo $action['id']; ?> = document.getElementById('delete<?php echo $action['id']; ?>')
-                    delete<?php echo $action['id']; ?>.addEventListener('closed.bs.alert', event => {
-                        $.ajax({
-                            url: 'destroy_delete_actions',
-                            type: 'POST',
-                            data: {
-                                id: <?php echo $action['id']; ?>
-                            },
-                            success: function(data) {
-                                console.log(data);
-                            }
+                            })
 
                         })
+                    </script>
+                <?php endforeach ?>
+            <?php endif ?>
 
-                    })
-                </script>
+            <?php if (isset($_SESSION['actions']['delete'])) : ?>
+                <?php foreach ($_SESSION['actions']['delete'] as $action) : ?>
 
-            <?php endforeach ?>
-
-
-            <?php foreach ($_SESSION['actions']['edit'] as $action) : ?>
-
-                <div id="edit<?php echo $action['id']; ?>" class="alert alert-dismissible fade show <?php echo $action['type']; ?>" role="alert">
-                    <?php echo $action['msg']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                    <div id="delete<?php echo $action['id']; ?>" class="alert alert-dismissible fade show <?php echo $action['type']; ?>" role="alert">
+                        <?php echo $action['msg']; ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
 
 
-                <script>
-                    const edit<?php echo $action['id']; ?> = document.getElementById('edit<?php echo $action['id']; ?>')
-                    edit<?php echo $action['id']; ?>.addEventListener('closed.bs.alert', event => {
-                        $.ajax({
-                            url: 'destroy_edit_actions',
-                            type: 'POST',
-                            data: {
-                                id: <?php echo $action['id']; ?>
-                            },
-                            success: function(data) {
-                                console.log(data);
-                            }
+                    <script>
+                        const delete<?php echo $action['id']; ?> = document.getElementById('delete<?php echo $action['id']; ?>')
+                        delete<?php echo $action['id']; ?>.addEventListener('closed.bs.alert', event => {
+                            $.ajax({
+                                url: 'destroy_delete_actions',
+                                type: 'POST',
+                                data: {
+                                    id: <?php echo $action['id']; ?>
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                }
+
+                            })
 
                         })
+                    </script>
 
-                    })
-                </script>
+                <?php endforeach ?>
+            <?php endif ?>
 
-            <?php endforeach ?>
+            <?php if (isset($_SESSION['actions']['edit'])) : ?>
+                <?php foreach ($_SESSION['actions']['edit'] as $action) : ?>
 
+                    <div id="edit<?php echo $action['id']; ?>" class="alert alert-dismissible fade show <?php echo $action['type']; ?>" role="alert">
+                        <?php echo $action['msg']; ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+
+                    <script>
+                        const edit<?php echo $action['id']; ?> = document.getElementById('edit<?php echo $action['id']; ?>')
+                        edit<?php echo $action['id']; ?>.addEventListener('closed.bs.alert', event => {
+                            $.ajax({
+                                url: 'destroy_edit_actions',
+                                type: 'POST',
+                                data: {
+                                    id: <?php echo $action['id']; ?>
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                }
+
+                            })
+
+                        })
+                    </script>
+
+                <?php endforeach ?>
+            <?php endif ?>
 
 
 

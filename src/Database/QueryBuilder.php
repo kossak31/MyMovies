@@ -26,10 +26,25 @@ class QueryBuilder
     // encontrar por id
     public function findById($table, $id, $class = "StdClass")
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE  id=:id");
+        $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE id=:id");
         $stmt->setFetchMode(PDO::FETCH_CLASS, $class);
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
+    }
+
+    public function findByAnotherId($table, $id, $field_id = null, $class = "StdClass")
+    {
+        if ($field_id == null) {
+            $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE id=:id");
+            $stmt->setFetchMode(PDO::FETCH_CLASS, $class);
+            $stmt->execute(['id' => $id]);
+            $fetch = $stmt->fetch();
+        } else {
+            $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE $field_id=:id");
+            $stmt->execute(['id' => $id]);
+            $fetch = $stmt->fetchAll(PDO::FETCH_CLASS);
+        }
+        return $fetch;
     }
 
     //delete por id
@@ -39,52 +54,8 @@ class QueryBuilder
         $stmt->execute(['id' => $id]);
     }
 
-
-    public function insertMovie($movie)
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO movie (name, year, country, trailer, director_id) VALUES (:name, :year, :country, :trailer, :director_id)");
-        $stmt->execute([
-            'name' => $movie->name,
-            'year' => $movie->year,
-            'country' => $movie->country,
-            'trailer' => $movie->trailer,
-            'director_id' => $movie->director_id
-        ]);
-        $id = $this->pdo->lastInsertId();
-
-        foreach ($movie->genre as $genre) {
-            $stmt = $this->pdo->prepare("INSERT INTO genremovie (movie_id, genre_id) VALUES (:movie_id, :genre_id)");
-            $stmt->execute(['movie_id' => $id, 'genre_id' => $genre]);
-        }
-
-        foreach ($movie->actor as $actor) {
-            $stmt = $this->pdo->prepare("INSERT INTO actormovie (movie_id, actor_id) VALUES (:movie_id, :actor_id)");
-            $stmt->execute(['movie_id' => $id, 'actor_id' => $actor]);
-        }
-
-
-
-        if (empty($_FILES['file']['name'])) {
-
-            $target_dir = "covers/";
-            $imageFileType = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-            $source_file = $target_dir . $id . "." . $imageFileType;
-
-
-
-            if ($_FILES["file"]["size"] > 500000) {
-                echo "tamanho do ficheiro muito grande!";
-            }
-
-
-            if (move_uploaded_file($_FILES["file"]["tmp_name"], $source_file && $imageFileType != "jpg")) {
-                echo htmlspecialchars(basename($_FILES["file"]["name"])) . " foi enviado com sucesso.";
-            } else {
-                echo "erro no upload do ficheiro de imagem";
-            }
-        }
-    }
-    //update movie
+    
+    //actualiza filmes
     public function updateMovie($movie)
     {
         $stmt = $this->pdo->prepare("UPDATE movie SET name=:name, year=:year, country=:country, trailer=:trailer, director_id=:director_id WHERE id=:id");
@@ -113,62 +84,26 @@ class QueryBuilder
             $stmt->execute(['movie_id' => $movie->id, 'actor_id' => $actor]);
         }
     }
-    //inserir ator
-    public function insertActor($actor)
+
+
+    public function insert($table, $data)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO actor (name) VALUES (:name)");
-        $stmt->execute([
-            'name' => $actor->name,
-        ]);
+        $columns = implode(", ", array_keys($data));
+        $values = ":" . implode(", :", array_keys($data));
+        $stmt = $this->pdo->prepare("INSERT INTO $table ($columns) VALUES ($values)");
+        $stmt->execute($data);
     }
 
-    public function insertDirector($director)
+    public function update($table, $data)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO director (name) VALUES (:name)");
-        $stmt->execute([
-            'name' => $director->name,
-        ]);
+        foreach ($data as $keys => $value) {
+            $line[] = $keys . "=:" . $keys;
+        }
+        $line = implode(', ', $line);
+
+        $stmt = $this->pdo->prepare("UPDATE $table SET $line WHERE id=:id");
+        $stmt->execute($data);
     }
-
-    public function insertGenre($genre)
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO genre (name) VALUES (:name)");
-        $stmt->execute([
-            'name' => $genre->name,
-        ]);
-    }
-
-    //update actor
-    public function updateActor($actor)
-    {
-        $stmt = $this->pdo->prepare("UPDATE actor SET name=:name WHERE id=:id");
-        $stmt->execute([
-            'name' => $actor->name,
-            'id' => $actor->id
-        ]);
-    }
-
-    public function updateDirector($director)
-    {
-        $stmt = $this->pdo->prepare("UPDATE director SET name=:name WHERE id=:id");
-        $stmt->execute([
-            'name' => $director->name,
-            'id' => $director->id
-        ]);
-    }
-
-
-
-    public function updateGenre($genre)
-    {
-        $stmt = $this->pdo->prepare("UPDATE genre SET name=:name WHERE id=:id");
-        $stmt->execute([
-            'name' => $genre->name,
-            'id' => $genre->id
-        ]);
-    }
-
-
 
     // selecionar ultimo registo
     public function getLast($table, $class = "StdClass")
@@ -195,52 +130,13 @@ class QueryBuilder
         return $stmt->fetchColumn();
     }
 
-
-
-    // encontrar generos por filme id
-    public function findByMovieId($table, $id, $class = "StdClass")
+    public function findByInnerJoin($table, $JoinTable, $id, $JoinId, $class = "StdClass")
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM $table INNER JOIN genremovie ON genremovie.genre_id  = $table.id WHERE  movie_id=:id");
+        $sql = "SELECT * FROM {$table} INNER JOIN {$JoinTable} ON {$JoinTable}.{$table}_id = {$table}.id WHERE {$JoinId}_id = :id";
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
     }
-
-
-
-    // encontrar genero id
-    public function findByGenreId($table, $id, $class = "StdClass")
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM $table INNER JOIN genremovie ON genremovie.movie_id  = $table.id WHERE  genre_id=:id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
-    }
-
-
-    // encontrar actores por filme id
-    public function findByActorId($table, $id, $class = "StdClass")
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM $table INNER JOIN actormovie ON actormovie.actor_id  = $table.id WHERE  movie_id=:id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
-    }
-
-    // encontrar filmes por actores id
-    public function findByActorIdMovie($table, $id, $class = "StdClass")
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM $table INNER JOIN actormovie ON actormovie.movie_id  = $table.id WHERE  actor_id=:id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
-    }
-
-
-    //encontrar filmes por diretor id
-    public function findByDirectorId($id)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM movie WHERE  director_id=:id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS);
-    }
-
 
 
     public function searchByName($table, $name)
@@ -249,9 +145,6 @@ class QueryBuilder
         $stmt->execute(['name' => '%' . $name . '%']);
         return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
-
-
-
 
     //password recover
     public function selectUserByEmail($table, $email, $class = "StdClass")
@@ -353,5 +246,25 @@ class QueryBuilder
     {
         $stmt = $this->pdo->prepare("DELETE FROM favorite WHERE user_id = :user_id AND movie_id = :movie_id");
         $stmt->execute(['user_id' => $user_id, 'movie_id' => $movie_id]);
+    }
+
+    public function insertGenresPHPUnit($movie_id, $genre_id)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO genremovie (movie_id, genre_id) VALUES (:movie_id, :genre_id)");
+        $stmt->execute(['movie_id' => $movie_id, 'genre_id' => $genre_id]);
+    }
+
+    public function insertActorsPHPUnit($movie_id, $actor_id)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO actormovie (movie_id, actor_id) VALUES (:movie_id, :actor_id)");
+        $stmt->execute(['movie_id' => $movie_id, 'actor_id' => $actor_id]);
+    }
+
+
+    public function topFavoritos()
+    {
+        $stmt = $this->pdo->prepare("SELECT movie.name, favorite.movie_id, COUNT(movie_id) AS total FROM favorite INNER JOIN movie ON favorite.movie_id=movie.id GROUP BY movie_id ORDER BY total DESC LIMIT 5");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
 }

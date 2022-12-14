@@ -7,15 +7,12 @@ use App\Session;
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-
-
 $movie = $queryBuilder->findById('movie', $id, 'App\Model\Movie');
-
-$genresMovie = $queryBuilder->findByMovieId('genre', $id, 'App\Model\Genre');
-
 $director = $queryBuilder->findById('director', $movie->director_id, 'App\Model\Director');
 
-$actors = $queryBuilder->findByActorId('actor', $id, 'App\Model\Actor');
+$genresMovie = $queryBuilder->findByInnerJoin('genre', 'genremovie', $id, 'movie', 'App\Model\Genre');
+$actors = $queryBuilder->findByInnerJoin('actor', 'actormovie', $id, 'movie', 'App\Model\Actor');
+
 
 
 $login = Session::get('login');

@@ -20,22 +20,24 @@ if ($token !== $_SESSION['token']) {
     if (!empty($_POST)) {
 
         $genre = new Genre();
-        $genre->name = $_POST['name'];
+        $genre->name = strip_tags($_POST['name']);
 
-        $queryBuilder->insertGenre($genre);
+        $queryBuilder->insert('genre', [
+            'name' => $genre->name,
+        ]);
 
         $last = $queryBuilder->getLast('genre', 'App\Model\Genre');
 
         $arr = array(
             'id' => $last->id,
             'type' => 'alert-primary',
-            'msg' => 'foi inserido um género ' . "<b>" . $last->name . "</b>",
+            'msg' => 'foi inserido um género ' . "<b>" . strip_tags($last->name) . "</b>",
         );
 
         $_SESSION['actions']['add'][$last->id] = $arr;
 
 
-        Session::setInfo('alert-primary', 'foi inserido um género chamado ' . "<b>" . $_POST['name'] . "</b>");
+        Session::setInfo('alert-primary', 'foi inserido um género chamado ' . "<b>" . strip_tags($_POST['name']) . "</b>");
 
         redirect('admin/generos');
     }

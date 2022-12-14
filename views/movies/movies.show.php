@@ -9,15 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-image: url('../img/background.jpg');">
 
     <?php require 'views/navbar.php'; ?>
 
     <div class="container">
-        <div class="col-12">
-            <h1>Acerca do filme: <b><?php echo $movie->name; ?></b></h1>
 
-        </div>
+        <h1>Acerca do filme: <b><?php echo $movie->name; ?></b></h1>
+
+
         <table class="table">
             <tr>
                 <td>
@@ -26,9 +26,12 @@
                             <td>
                                 <img src="../covers/<?php echo $movie->id; ?>.jpg" width="150" height="200" style="margin: 3px 5px 0 0; max-width:220px; height:auto; width:auto;" onerror="this.src='../img/dvd-cover.jpg'">
                             </td>
+                            <td width="50"></td>
                         </tr>
+                        
                     </table>
                     <table>
+                        
                         <tr valign="top">
                             <td>
 
@@ -46,7 +49,7 @@
 
 
                             </td>
-                            <td width="10"></td>
+                            <td width="50"></td>
                             <td>
                                 <div><b>Ano:</b> <?php echo $movie->year; ?></div>
 

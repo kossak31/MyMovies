@@ -9,7 +9,7 @@ $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
 
-$user = $_POST['username'];
+$user = strip_tags($_POST['username']);
 $passwordPOST = $_POST['password'];
 
 $password = password_hash($passwordPOST, PASSWORD_DEFAULT);

@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-image: url('../img/background.jpg');">
 
     <?php require 'views/navbar.php'; ?>
 
@@ -18,13 +18,20 @@
 
 
 
-            <h2>filmes realizados por <?php echo $director->name; ?></h2>
+            <h2 class="my-5">Filmes realizados por: <b><?php echo $director->name; ?></b></h2>
             <?php foreach ($movies as $movie) : ?>
-                <ul>
-                    <li><a href="<?php echo route ('filmes/'.$movie->id); ?>"><?php echo $movie->name; ?></a></li>
-                </ul>
-            <?php endforeach ?>
+                <div class="col-3">
 
+                    <div class="card">
+                        
+                        <img height="390" class="card-img-top" src="../covers/<?php echo $movie->id; ?>.jpg" onerror="this.src='../img/dvd-cover.jpg'">
+                        <div class="card-body">
+                            <a href="<?php echo route('filmes/' . $movie->id); ?>" class="d-flex justify-content-center btn btn-primary"><?php echo $movie->name; ?></a>
+                            
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
 
 
         </div>

@@ -1,6 +1,4 @@
 <?php
-
-
 use App\Database\Connection;
 use App\Database\QueryBuilder;
 use App\Session;
@@ -16,9 +14,10 @@ $directors = $queryBuilder->getAll('director');
 
 $movie = $queryBuilder->findById('movie', $id, 'App\Model\Movie');
 
-$genrex = $queryBuilder->findByMovieId('genre', $movie->id);
+$genrex = $queryBuilder->findByInnerJoin('genre', 'genremovie', $movie->id, 'movie', 'App\Model\Genre');
 
-$actorx = $queryBuilder->findByActorId('actor', $movie->id);
+$actorx = $queryBuilder->findByInnerJoin('actor', 'actormovie', $movie->id, 'movie', 'App\Model\Actor');
+
 
 foreach ($directors as $director) {
     $movie_director = $queryBuilder->findById('director', $movie->director_id);

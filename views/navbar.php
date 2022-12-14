@@ -25,6 +25,11 @@
                         <a class="nav-link" href="<?php echo route('realizadores'); ?>">Listar Realizadores</a>
                     </li>
 
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo route('top-favoritos'); ?>">Top Favoritos</a>
+                    </li>
+
                 <?php endif; ?>
 
                 <!-- menu admin -->
@@ -121,6 +126,7 @@
                                 <a class="dropdown-item" href="<?php echo route('admin/realizadores'); ?>">Gerir Realizadores</a>
                             </li>
 
+
                         </ul>
                     </li>
 
@@ -138,7 +144,7 @@
 
             </ul>
 
-            <?php if ( $username == true &&  "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] == 'http://localhost/Movies/filmes') : ?>
+            <?php if ($username == true &&  "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] == 'http://localhost/Movies/filmes') : ?>
                 <div class="lista navbar-nav">
                     <ul class="navbar-nav me-auto mb-2 mb-sm-0 dropstart">
 
@@ -148,8 +154,8 @@
                                 Favoritos
                             </a>
                             <ul id="lista_favoritos" class="dropdown-menu">
-                            
-                            <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
+
+                                <?php foreach ($favoriteMovies as $favoriteMovie) : ?>
                                     <li id="favorito<?php echo $favoriteMovie->id; ?>"><a class="dropdown-item" href="<?php echo route('filmes/' . $favoriteMovie->id); ?>"><?php echo $favoriteMovie->name; ?></a></li>
                                 <?php endforeach; ?>
 

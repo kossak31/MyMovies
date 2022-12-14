@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-image: url('img/background.jpg');">
 
     <?php require 'views/navbar.php'; ?>
 
@@ -50,7 +50,7 @@
 
             <div class="mb-3">
                 <label for="">Selecionar Realizador:</label>
-                <select class="form-select" name="director" required>
+                <select class="form-select" name="director_id" required>
                     <?php foreach ($directors as $director) : ?>
                         <option value="<?php echo $director->id; ?>"><?php echo $director->name; ?></option>
                     <?php endforeach; ?>

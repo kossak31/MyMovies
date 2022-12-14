@@ -55,26 +55,31 @@ class RoutesTest extends TestCase
         $this->assertEquals(200, $ator_show->getStatusCode());
     }
 
-    public function testRotaPOST()
+    public function testRotasPOST()
     {
 
+        $connection = Connection::make();
+        $queryBuilder = new QueryBuilder($connection);
+
         $_SESSION['token'] = Session::generateToken();
-        
+
+
         $filme_add = $this->http->request('POST', 'http://localhost/Movies/filmes', [
             'form_params' => [
                 'name' => 'PHPUNIT TEST',
                 'year' => '2020',
                 'country' => 'Portugal',
                 'director_id' => '1',
-                'genre' => '1',
-                'actor' => '1',
                 'trailer' => 'https://www.youtube.com',
                 'token' => Session::getToken()
-                
-
             ]
-
         ]);
+
+        $last_movie = $queryBuilder->getLast('movie', 'App\Model\Movie');
+
+        $queryBuilder->insertGenresPHPUnit($last_movie->id, 1);
+
+        $queryBuilder->insertActorsPHPUnit($last_movie->id, 1);
 
         $genero_add = $this->http->request('POST', 'http://localhost/Movies/generos', [
             'form_params' => [
@@ -109,7 +114,7 @@ class RoutesTest extends TestCase
 
 
 
-    public function testRotaDelete()
+    public function testRotasDelete()
     {
 
 

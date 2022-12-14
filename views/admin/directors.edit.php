@@ -10,7 +10,7 @@
 </head>
 
 
-<body>
+<body style="background-image: url('img/background.jpg');">
 
     <?php require 'views/navbar.php'; ?>
 
